@@ -9,5 +9,5 @@ package persistence;
  * @author Olivier
  */
 public class Joueur {
-    
+   int test = 2;
 }
