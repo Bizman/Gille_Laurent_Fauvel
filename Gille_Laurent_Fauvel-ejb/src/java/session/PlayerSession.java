@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package session;
 
 import javax.ejb.Stateless;
@@ -11,10 +7,6 @@ import javax.ejb.*;
 
 import persistence.*;
 
-/**
- *
- * @author Olivier
- */
 @Stateless
 @LocalBean
 public class PlayerSession {
@@ -36,5 +28,4 @@ public class PlayerSession {
     public void persist(Object obj){
         em.persist(obj);
     }
-
 }

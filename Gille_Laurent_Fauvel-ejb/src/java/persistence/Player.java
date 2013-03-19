@@ -1,15 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package persistence;
 
-/**
- *
- * @author Olivier
- */
 import javax.persistence.*;
-//import javax.persistence.OneToMany;
 
 @Entity
 
@@ -26,12 +17,12 @@ public class Player implements java.io.Serializable{
        
    }
    public Player(String firstName, String lastName, String nickName, String password, String mail, int score) {
-       setFirstName(firstName);
-       setLastName(lastName);
-       setNickName(nickName);
-       setPassword(password);
-       setMail(mail);
-       setScore(score);
+       this.firstName = firstName;
+       this.lastName = lastName;
+       this.mail = mail;
+       this.nickName = nickName;
+       this.password = password;
+       this.score = score;
    }
    public String getFirstName() {
        return firstName;
@@ -71,5 +62,4 @@ public class Player implements java.io.Serializable{
    public void setScore(int newScore) {
        score = newScore;
    }
-
 }
