@@ -3,11 +3,12 @@ package persistence;
 import javax.persistence.*;
 
 @Entity
-
 public class Player implements java.io.Serializable{
     
    private String firstName;
    private String lastName;
+   @Id
+   @Column(name="NickName")
    private String nickName;
    private String password;
    private String mail;
@@ -16,6 +17,7 @@ public class Player implements java.io.Serializable{
    public Player() {
        
    }
+   
    public Player(String firstName, String lastName, String nickName, String password, String mail, int score) {
        this.firstName = firstName;
        this.lastName = lastName;
@@ -24,41 +26,51 @@ public class Player implements java.io.Serializable{
        this.password = password;
        this.score = score;
    }
+   
    public String getFirstName() {
        return firstName;
    }
+   
    public String getLastName() {
        return lastName;
    }
-   @Id
-   @Column(name="NickName")
-   public String getNickName() { //primary Key
+   
+      public String getNickName() { //primary Key
        return nickName;
    }
+   
    public String getPassword() {
        return password;
    }
+   
    public String getMail() {
        return mail;
    }
+   
    public int getScore() {
        return score;
    }
+   
    public void setFirstName(String newFirstName) {
        firstName = newFirstName;
    }
+   
    public void setLastName(String newLastName) {
        lastName = newLastName;
    }
+   
    public void setNickName(String newNickName) {
        nickName = newNickName;
    }
+   
    public void setPassword(String newPassword) {
        password = newPassword;
    }
+   
    public void setMail(String newMail) {
        mail = newMail;
    }
+   
    public void setScore(int newScore) {
        score = newScore;
    }

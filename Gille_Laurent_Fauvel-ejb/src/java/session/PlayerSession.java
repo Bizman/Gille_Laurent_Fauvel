@@ -1,19 +1,13 @@
 package session;
 
-import javax.ejb.Stateless;
-import javax.ejb.LocalBean;
-import javax.persistence.*;
 import javax.ejb.*;
-
-import persistence.*;
+import javax.persistence.EntityManager;
 
 @Stateless
 @LocalBean
 public class PlayerSession {
     
-    @javax.persistence.PersistenceContext(unitName="PlayerSessionPersistence")
     private EntityManager em;
-
     
     public PlayerSession() {
         

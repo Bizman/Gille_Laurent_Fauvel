@@ -12,7 +12,7 @@ import javax.ejb.Remote;
  * @author Alex
  */
 @Remote
-public interface ConnectivityHandlerInterface extends Serializable {
+public interface ConnectivityHandlerInterface {
     
     public static final int SUBSCRIBE_OK = 0;
     public static final int NICK_TAKEN = 1;
