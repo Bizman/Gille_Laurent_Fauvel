@@ -4,14 +4,61 @@
     Author     : Olivier
 --%>
 
+<%@page import="javax.naming.InitialContext"%>
+<%@page import="session.ConnectivityHandlerInterface"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%!
+    private ConnectivityHandlerInterface connectHandler = null;
+    
+    public void jspInit() {
+        try {
+            connectHandler = (ConnectivityHandlerInterface) (new InitialContext()).lookup(ConnectivityHandlerInterface.class.getName());
+        } catch (Exception ex) {
+            System.err.println("Exception: " + ex.getMessage());
+        }
+    }
+%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>O. Fauvel - A. Gille - A. Laurent - SI4 2013</title>
+        <style type="text/css">
+            
+        </style>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Bienvenue!</h1>
+        <h2>Inscription</h2>
+        <form method="post">
+            <p><label>Pseudo</label><input type="text" name="nick" /></p>
+            <p><label>Prénom</label><input type="text" name="prenom" /></p>
+            <p><label>Nom</label><input type="text" name="nom" /></p>
+            <p><label>Email</label><input type="email" name="email" /></p>
+            <p><label>Mot de passe</label><input type="password" name="pwd" /></p>
+            <p><input type="submit" value="Envoyer" /></p>
+        </form>
+        <%
+            String prenom = (String) request.getParameter("prenom");
+            String nom = (String) request.getParameter("nom");
+            String email = (String) request.getParameter("email");
+            String pwd = (String) request.getParameter("pwd");
+            String nick = (String) request.getParameter("nick");
+            
+            if (prenom != null &&  nom != null && email != null &&  pwd != null &&  nick != null) {
+                
+                if (prenom.length() > 0 && email.length() > 0 && pwd.length() > 0 && nom.length() > 0 && nick.length() > 0) {
+                    int r = connectHandler.subscribe(nick, prenom, nom, pwd, email);
+
+                    if (r == ConnectivityHandlerInterface.SUBSCRIBE_OK) {
+                        out.println("Inscription OK!");
+                        response.sendRedirect("room.jsp");
+                    }
+                    
+                } else {
+                    out.println("Formulaire incomplet!");
+                }
+            }            
+        %>
     </body>
 </html>
