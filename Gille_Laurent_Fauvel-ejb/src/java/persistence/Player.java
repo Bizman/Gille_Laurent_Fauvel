@@ -8,7 +8,12 @@ package persistence;
  *
  * @author Olivier
  */
-public class Player {
+import javax.persistence.*;
+//import javax.persistence.OneToMany;
+
+@Entity
+
+public class Player implements java.io.Serializable{
     
    private String firstName;
    private String lastName;
@@ -20,13 +25,23 @@ public class Player {
    public Player() {
        
    }
+   public Player(String firstName, String lastName, String nickName, String password, String mail, int score) {
+       setFirstName(firstName);
+       setLastName(lastName);
+       setNickName(nickName);
+       setPassword(password);
+       setMail(mail);
+       setScore(score);
+   }
    public String getFirstName() {
        return firstName;
    }
    public String getLastName() {
        return lastName;
    }
-   public String getNickName() {
+   @Id
+   @Column(name="NickName")
+   public String getNickName() { //primary Key
        return nickName;
    }
    public String getPassword() {
@@ -56,4 +71,5 @@ public class Player {
    public void setScore(int newScore) {
        score = newScore;
    }
+
 }
