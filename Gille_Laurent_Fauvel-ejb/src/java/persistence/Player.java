@@ -29,7 +29,31 @@ public class Player {
    public String getNickName() {
        return nickName;
    }
-   
-   
-   
+   public String getPassword() {
+       return password;
+   }
+   public String getMail() {
+       return mail;
+   }
+   public int getScore() {
+       return score;
+   }
+   public void setFirstName(String newFirstName) {
+       firstName = newFirstName;
+   }
+   public void setLastName(String newLastName) {
+       lastName = newLastName;
+   }
+   public void setNickName(String newNickName) {
+       nickName = newNickName;
+   }
+   public void setPassword(String newPassword) {
+       password = newPassword;
+   }
+   public void setMail(String newMail) {
+       mail = newMail;
+   }
+   public void setScore(int newScore) {
+       score = newScore;
+   }
 }
