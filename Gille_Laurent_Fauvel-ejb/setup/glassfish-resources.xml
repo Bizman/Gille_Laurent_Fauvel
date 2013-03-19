@@ -11,4 +11,5 @@
         <property name="driverClass" value="org.apache.derby.jdbc.ClientDriver"/>
     </jdbc-connection-pool>
     <jdbc-resource enabled="true" jndi-name="Gille_Laurent_Fauvel" object-type="user" pool-name="derby_net_Gille_Laurent_Fauvel_DataBase_glfPool"/>
+    <jdbc-resource enabled="true" jndi-name="Gille_Laurent_Fauvel2" object-type="user" pool-name="derby_net_Gille_Laurent_Fauvel_DataBase_glfPool"/>
 </resources>
