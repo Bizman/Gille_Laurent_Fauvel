@@ -19,8 +19,8 @@ import persistence.*;
 @LocalBean
 public class PlayerSession {
     
-    @javax.persistence.PersistenceContext(unitName="PlayerSessionPersistence")
-    private EntityManager em;
+    @javax.persistence.PersistenceContext(unitName="persistence_sample")
+    private EntityManager em ;
 
     
     public PlayerSession() {
