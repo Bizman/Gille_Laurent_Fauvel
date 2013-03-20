@@ -1,17 +1,13 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Classe d'identification de clé primaire composite simple
+ * Permet de représenter la classe Player par une clé primaire
+ * composée de deux attributs de classse.
+ * @author Alexandre Gille
  */
 package persistence;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
 
-/**
- *
- * @author Alex
- */
-@Entity
 public class PlayerId implements Serializable {
     
     private String nickName;
