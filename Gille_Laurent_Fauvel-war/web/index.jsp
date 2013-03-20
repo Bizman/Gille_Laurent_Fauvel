@@ -54,7 +54,6 @@
                         out.println("Inscription OK!");
                         response.sendRedirect("room.jsp");
                     }
-                    
                 } else {
                     out.println("Formulaire incomplet!");
                 }

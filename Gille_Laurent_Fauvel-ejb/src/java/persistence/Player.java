@@ -35,7 +35,7 @@ public class Player implements java.io.Serializable{
        return lastName;
    }
    
-      public String getNickName() { //primary Key
+   public String getNickName() { //primary Key
        return nickName;
    }
    

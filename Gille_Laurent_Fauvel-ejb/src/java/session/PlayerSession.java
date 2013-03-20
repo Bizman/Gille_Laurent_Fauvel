@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 @LocalBean
 public class PlayerSession {
     
+    @javax.persistence.PersistenceContext(unitName="PlayerSessionPersistence")
     private EntityManager em;
     
     public PlayerSession() {
