@@ -1,10 +1,14 @@
 package persistence;
 
+import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
-@IdClass(PlayerId.class)
-public class Player implements java.io.Serializable {
+@NamedQueries(
+    value={
+        @NamedQuery(name="checkEmail", query="SELECT mail from GLF.PLAYER")
+    })
+public class Player implements Serializable {
 
     @Id
     @Column(name = "NickName")
@@ -12,8 +16,6 @@ public class Player implements java.io.Serializable {
     private String firstName;
     private String lastName;
     private String password;
-    @Id
-    @Column(name = "Mail")
     private String mail;
     private int score;
 

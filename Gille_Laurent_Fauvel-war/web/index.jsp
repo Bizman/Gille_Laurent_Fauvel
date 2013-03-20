@@ -53,8 +53,9 @@
                     if (r == ConnectivityHandlerInterface.SUBSCRIBE_OK) {
                         out.println("Inscription OK!");
                         response.sendRedirect("room.jsp");
+                    } else if( r == ConnectivityHandlerInterface.NICK_TAKEN) {
+                        out.println("Pseudo déjà utilisé!");
                     }
-                    
                 } else {
                     out.println("Formulaire incomplet!");
                 }

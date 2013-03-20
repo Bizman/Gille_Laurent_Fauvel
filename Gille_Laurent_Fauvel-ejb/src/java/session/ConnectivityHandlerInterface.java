@@ -4,7 +4,6 @@
  */
 package session;
 
-import java.io.Serializable;
 import javax.ejb.Remote;
 
 /**
