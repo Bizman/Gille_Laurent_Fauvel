@@ -6,7 +6,8 @@ import javax.persistence.*;
 @Entity
 @NamedQueries(
     value={
-        @NamedQuery(name="checkEmail", query="SELECT mail from GLF.PLAYER")
+        @NamedQuery(name="checkEmail", query="SELECT p FROM Player p WHERE p.mail = :mail"),
+        @NamedQuery(name="verifyUserData", query="SELECT p FROM Player p WHERE p.nickName = :nickName AND p.password = :password")
     })
 public class Player implements Serializable {
 

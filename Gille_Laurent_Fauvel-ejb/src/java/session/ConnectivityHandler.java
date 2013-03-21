@@ -16,7 +16,7 @@ public class ConnectivityHandler implements ConnectivityHandlerInterface {
         
         if (em.find(Player.class, nick) != null) {
             return ConnectivityHandler.NICK_TAKEN;
-        } else if (!em.createNamedQuery("checkEmail").getResultList().isEmpty()) {
+        } else if (!em.createNamedQuery("checkEmail").setParameter("mail", email).getResultList().isEmpty()) {
             return ConnectivityHandler.MAIL_TAKEN;
         } else {
             em.persist(p);
@@ -26,7 +26,11 @@ public class ConnectivityHandler implements ConnectivityHandlerInterface {
 
     @Override
     public int connect(String nick, String password) {
-        return ConnectivityHandlerInterface.CONNECTION_OK;
+        if (em.createNamedQuery("verifyUserData").setParameter("nickName", nick).setParameter("password", password).getResultList().isEmpty()) {
+            return ConnectivityHandler.BAD_INFO;
+        } else {
+            return ConnectivityHandlerInterface.CONNECTION_OK;
+        }
     }
     
 }
