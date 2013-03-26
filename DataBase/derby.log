@@ -60,3 +60,5 @@ java.runtime.version=1.7.0_15-b03
 user.dir=C:\glassfish-3.1.2.2\javadb
 derby.system.home=D:\Dropbox\Cours SI4\Serveur_Entreprise\TP\ejb\entreprise\Gille_Laurent_Fauvel\DataBase
 Chargeur de classe de la base de données démarré - derby.database.classpath=''
+----------------------------------------------------------------
+Wed Mar 20 10:09:05 CET 2013: Shutting down Derby engine

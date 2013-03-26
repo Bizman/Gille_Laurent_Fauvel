@@ -13,6 +13,7 @@ public class Room {
     * son appel et forcer à passer par la méthode <link
     */
     private Room() {
+        
     }
 
     /** L'instance statique */

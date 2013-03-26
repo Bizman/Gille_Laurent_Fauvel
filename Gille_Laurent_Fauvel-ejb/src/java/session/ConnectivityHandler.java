@@ -13,8 +13,12 @@ public class ConnectivityHandler implements ConnectivityHandlerInterface {
     @Override
     public int subscribe(String nick, String firstName, String lastName, String password, String email) {
         Player p = new Player(firstName, lastName, nick, password, email, 0);
-        em.persist(p);
-        return ConnectivityHandlerInterface.SUBSCRIBE_OK;
+        if (em.find(Player.class, p.getNickName()) != null) {
+            return ConnectivityHandler.NICK_TAKEN;
+        } else {
+            em.persist(p);
+            return ConnectivityHandlerInterface.SUBSCRIBE_OK;
+        }
     }
 
     @Override
