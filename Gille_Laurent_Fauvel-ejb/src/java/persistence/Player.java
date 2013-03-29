@@ -1,10 +1,15 @@
 package persistence;
 
+import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
-@IdClass(PlayerId.class)
-public class Player implements java.io.Serializable {
+@NamedQueries(
+    value={
+        @NamedQuery(name="checkEmail", query="SELECT p FROM Player p WHERE p.mail = :mail"),
+        @NamedQuery(name="verifyUserData", query="SELECT p FROM Player p WHERE p.nickName = :nickName AND p.password = :password")
+    })
+public class Player implements Serializable {
 
     @Id
     @Column(name = "NickName")
@@ -12,8 +17,6 @@ public class Player implements java.io.Serializable {
     private String firstName;
     private String lastName;
     private String password;
-    @Id
-    @Column(name = "Mail")
     private String mail;
     private int score;
 
@@ -37,7 +40,7 @@ public class Player implements java.io.Serializable {
         return lastName;
     }
 
-    public String getNickName() {
+    public String getNickName() { //primary Key
         return nickName;
     }
 

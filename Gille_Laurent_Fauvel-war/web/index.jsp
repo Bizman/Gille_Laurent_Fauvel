@@ -29,35 +29,69 @@
     </head>
     <body>
         <h1>Bienvenue!</h1>
-        <h2>Inscription</h2>
-        <form method="post">
-            <p><label>Pseudo</label><input type="text" name="nick" /></p>
-            <p><label>Prénom</label><input type="text" name="prenom" /></p>
-            <p><label>Nom</label><input type="text" name="nom" /></p>
-            <p><label>Email</label><input type="email" name="email" /></p>
-            <p><label>Mot de passe</label><input type="password" name="pwd" /></p>
-            <p><input type="submit" value="Envoyer" /></p>
-        </form>
         <%
             String prenom = (String) request.getParameter("prenom");
             String nom = (String) request.getParameter("nom");
             String email = (String) request.getParameter("email");
             String pwd = (String) request.getParameter("pwd");
             String nick = (String) request.getParameter("nick");
+            String type = (String) request.getParameter("req-type");
             
-            if (prenom != null &&  nom != null && email != null &&  pwd != null &&  nick != null) {
-                
-                if (prenom.length() > 0 && email.length() > 0 && pwd.length() > 0 && nom.length() > 0 && nick.length() > 0) {
-                    int r = connectHandler.subscribe(nick, prenom, nom, pwd, email);
+            if ("subscribe".equals(type)) {
+                if (prenom != null &&  nom != null && email != null &&  pwd != null &&  nick != null) {
 
-                    if (r == ConnectivityHandlerInterface.SUBSCRIBE_OK) {
-                        out.println("Inscription OK!");
-                        response.sendRedirect("room.jsp");
+                    if (prenom.length() > 0 && email.length() > 0 && pwd.length() > 0 && nom.length() > 0 && nick.length() > 0) {
+                        int r = connectHandler.subscribe(nick, prenom, nom, pwd, email);
+
+                        if (r == ConnectivityHandlerInterface.SUBSCRIBE_OK) {
+                            out.println("Vous êtes inscrit avec le pseudo '" + nick + "'. Vous pouvez vous connecter à votre espace utilisateur.");
+                            
+                        } else if (r == ConnectivityHandlerInterface.NICK_TAKEN) {
+                            out.println("Pseudo déjà utilisé!");
+                        } else if (r == ConnectivityHandlerInterface.MAIL_TAKEN) {
+                            out.println("Email déjà utilisé!");
+                        }
+                    } else {
+                        out.println("Formulaire incomplet!");
                     }
+                } 
+            } else {
+                    %>
+                    <h2>Inscription</h2>
+                    <form method="post">
+                        <p><label>Pseudo</label><input type="text" name="nick" /></p>
+                        <p><label>Prénom</label><input type="text" name="prenom" /></p>
+                        <p><label>Nom</label><input type="text" name="nom" /></p>
+                        <p><label>Email</label><input type="email" name="email" /></p>
+                        <p><label>Mot de passe</label><input type="password" name="pwd" /></p>
+                        <input type="hidden" name="req-type" value="subscribe" />
+                        <p><input type="submit" name="send" value="Envoyer" /></p>
+                    </form>
+                    <%
+            }
+            
+            if ("connect".equals(type)) {
+                int r = connectHandler.connect(nick, pwd);
+                
+                if (r == ConnectivityHandlerInterface.BAD_INFO) {
+                    out.println("Utilisateur inconnu. Les données peuvent être erronées.");
                 } else {
-                    out.println("Formulaire incomplet!");
+                    out.println("Connexion effectuée.");
+                    String redirectURL = "room.jsp";
+                    response.sendRedirect(redirectURL);
+                    return;
                 }
-            }            
+            } else {
+        %>
+        <h2>Connexion</h2>
+        <form method="POST">
+            <p><label>Login</label><input type="text" name="nick" /></p>
+            <p><label>Mot de passe</label><input type="text" name="pwd" /></p>
+            <input type="hidden" name="req-type" value="connect" />
+            <p><input type="submit" name="send" value="Envoyer" /></p>
+        </form>
+        <%
+               }
         %>
     </body>
 </html>
