@@ -1,15 +1,17 @@
 package session;
 
-import javax.ejb.Stateless;
+import javax.ejb.Stateful;
 import javax.persistence.*;
 import persistence.Player;
 
-@Stateless
+@Stateful
 public class ConnectivityHandler implements ConnectivityHandlerInterface {
     
     @PersistenceContext(unitName="PlayerSessionPersistence")
     private EntityManager em;
-
+    private String user;
+    
+    
     @Override
     public int subscribe(String nick, String firstName, String lastName, String password, String email) {
         Player p = new Player(firstName, lastName, nick, password, email, 0);
@@ -29,8 +31,15 @@ public class ConnectivityHandler implements ConnectivityHandlerInterface {
         if (em.createNamedQuery("verifyUserData").setParameter("nickName", nick).setParameter("password", password).getResultList().isEmpty()) {
             return ConnectivityHandler.BAD_INFO;
         } else {
+            user = nick;
             return ConnectivityHandlerInterface.CONNECTION_OK;
         }
+    }
+
+    @Override
+    public String test() {
+        System.err.println("Connecté: " + user);
+        return user;
     }
     
 }

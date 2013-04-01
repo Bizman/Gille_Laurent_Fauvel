@@ -37,6 +37,8 @@
             String nick = (String) request.getParameter("nick");
             String type = (String) request.getParameter("req-type");
             
+            out.println("Connecté: " + connectHandler.test());
+            
             if ("subscribe".equals(type)) {
                 if (prenom != null &&  nom != null && email != null &&  pwd != null &&  nick != null) {
 
