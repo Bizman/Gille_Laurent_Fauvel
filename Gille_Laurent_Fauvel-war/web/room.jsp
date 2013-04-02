@@ -4,20 +4,35 @@
     Author     : Alex
 --%>
 
+<%@page import="persistence.Player"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%!
-    
+<%
+    Player player = (Player) session.getAttribute("nick");
+    if(player == null) {
+        String redirectURL = "room.jsp";
+        response.sendRedirect(redirectURL);
+        return;
+    }
 %>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Salle de jeu</title>
+        <title>O. Fauvel - A. Gille - A. Laurent - SI4 2013</title>
     </head>
     <body>
         <h1>ROOM!</h1>
-        <div>
-            
-        </div>
+        <%        
+            String type = (String) request.getParameter("req-type");
+            if ("playVsComp".equals(type)) {
+                String redirectURL = "game.jsp";
+                response.sendRedirect(redirectURL);
+                return;
+            }
+        %>
+        <form method="POST">
+            <input type="hidden" name="req-type" value="playVsComp" />
+            <p><input type="submit" name="gameVsComp" value="Player vs Computer" /></p>
+        </form>
     </body>
 </html>
