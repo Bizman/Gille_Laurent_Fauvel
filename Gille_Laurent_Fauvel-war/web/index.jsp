@@ -37,8 +37,6 @@
             String nick = (String) request.getParameter("nick");
             String type = (String) request.getParameter("req-type");
             
-            out.println("Connecté: " + connectHandler.test());
-            
             if ("subscribe".equals(type)) {
                 if (prenom != null &&  nom != null && email != null &&  pwd != null &&  nick != null) {
 
@@ -47,6 +45,7 @@
 
                         if (r == ConnectivityHandlerInterface.SUBSCRIBE_OK) {
                             out.println("Vous êtes inscrit avec le pseudo '" + nick + "'. Vous pouvez vous connecter à votre espace utilisateur.");
+                            
                         } else if (r == ConnectivityHandlerInterface.NICK_TAKEN) {
                             out.println("Pseudo déjà utilisé!");
                         } else if (r == ConnectivityHandlerInterface.MAIL_TAKEN) {
@@ -78,6 +77,9 @@
                     out.println("Utilisateur inconnu. Les données peuvent être erronées.");
                 } else {
                     out.println("Connexion effectuée.");
+                    String redirectURL = "room.jsp";
+                    response.sendRedirect(redirectURL);
+                    return;
                 }
             } else {
         %>

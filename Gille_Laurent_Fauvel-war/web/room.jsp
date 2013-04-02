@@ -6,6 +6,7 @@
 
 <%@page import="persistence.Player"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%--
 <%
     Player player = (Player) session.getAttribute("nick");
     if(player == null) {
@@ -14,6 +15,7 @@
         return;
     }
 %>
+--%>
 <!DOCTYPE html>
 <html>
     <head>
