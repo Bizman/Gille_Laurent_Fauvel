@@ -37,6 +37,11 @@ public class ConnectivityHandler implements ConnectivityHandlerInterface {
     }
 
     @Override
+    public boolean userExists(String nick) {
+        return em.find(Player.class, nick) != null;
+    }
+    
+    @Override
     public String test() {
         System.err.println("Connecté: " + user);
         return user;

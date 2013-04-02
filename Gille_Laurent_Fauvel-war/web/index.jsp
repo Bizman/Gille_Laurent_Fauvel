@@ -77,6 +77,7 @@
                     out.println("Utilisateur inconnu. Les données peuvent être erronées.");
                 } else {
                     out.println("Connexion effectuée.");
+                    session.setAttribute("nick", nick);
                     String redirectURL = "room.jsp";
                     response.sendRedirect(redirectURL);
                     return;

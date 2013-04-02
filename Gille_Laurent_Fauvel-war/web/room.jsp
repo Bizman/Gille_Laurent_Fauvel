@@ -3,12 +3,27 @@
     Created on : 19 mars 2013, 15:25:47
     Author     : Alex
 --%>
-
+<%@page import="session.ConnectivityHandlerInterface"%>
+<%@page import="javax.sound.midi.SysexMessage"%>
+<%@page import="javax.naming.InitialContext"%>
 <%@page import="persistence.Player"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%!
+    private ConnectivityHandlerInterface connectHandler;
+    
+    public void jspInit() {
+        try {
+            connectHandler = (ConnectivityHandlerInterface) (new InitialContext()).lookup(ConnectivityHandlerInterface.class.getName());
+        } catch (Exception e) {
+            System.out.println("JEE sucks");
+        }
+    }
+%>
+
 <%
-    Player player = (Player) session.getAttribute("nick");
-    if(player == null) {
+    String nick = (String) session.getAttribute("nick");
+    out.println("Le nick: " + nick);
+    if(!connectHandler.userExists(nick)) {
         String redirectURL = "index.jsp";
         response.sendRedirect(redirectURL);
         return;
@@ -33,6 +48,10 @@
         <form method="POST">
             <input type="hidden" name="req-type" value="playVsComp" />
             <p><input type="submit" name="gameVsComp" value="Player vs Computer" /></p>
+        </form>
+        <form methode="POST">
+            <input type="hidden" name="req-type" value="disconnect" />
+            <p><input type="submit" value="Déconnecter" /></p>
         </form>
     </body>
 </html>

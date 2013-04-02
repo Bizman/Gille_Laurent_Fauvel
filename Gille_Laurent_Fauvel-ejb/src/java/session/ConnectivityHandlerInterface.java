@@ -22,6 +22,6 @@ public interface ConnectivityHandlerInterface {
     public int subscribe(String nick, String firstName, String lastName, String password, String email);
 
     public int connect(String nick, String password);
-    
+    public boolean userExists(String nick);
     public String test();
 }
