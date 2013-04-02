@@ -6,16 +6,14 @@
 
 <%@page import="persistence.Player"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%--
 <%
     Player player = (Player) session.getAttribute("nick");
     if(player == null) {
-        String redirectURL = "room.jsp";
+        String redirectURL = "index.jsp";
         response.sendRedirect(redirectURL);
         return;
     }
 %>
---%>
 <!DOCTYPE html>
 <html>
     <head>
