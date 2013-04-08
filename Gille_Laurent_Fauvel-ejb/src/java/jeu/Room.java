@@ -1,6 +1,9 @@
 package jeu;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.Context;
@@ -10,9 +13,9 @@ import persistence.Player;
 import session.PlayerSession;
 
 public class Room {
-    PlayerSession playerSession = lookupPlayerSessionBean();
 
-    private List<PlayerSession> players;
+    private HashMap<String, Boolean> players;
+    //private List<Player> players;
     private List<Game> games;
      /** L'instance statique */
     private static Room room;
@@ -30,15 +33,19 @@ public class Room {
     }
 
    public void Connexion(Player p){
+       players.put(p.getNickName(), false);
    }
-
-    private PlayerSession lookupPlayerSessionBean() {
-        try {
-            Context c = new InitialContext();
-            return (PlayerSession) c.lookup("java:global/Gille_Laurent_Fauvel/Gille_Laurent_Fauvel-ejb/PlayerSession!session.PlayerSession");
-        } catch (NamingException ne) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
-            throw new RuntimeException(ne);
-        }
-    }
+   
+   public String showPlayers(){
+       String list = new String();
+       HashMap map = new HashMap();
+       Set cles = map.keySet();
+       Iterator it = cles.iterator();
+       while (it.hasNext()){
+            String nickname = (String) it.next(); 
+            Boolean etat = (Boolean) map.get(nickname);
+            list += nickname + "        " + etat + "\n";   
+       }
+       return list;
+   }
 }

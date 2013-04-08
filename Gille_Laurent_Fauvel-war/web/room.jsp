@@ -3,6 +3,7 @@
     Created on : 19 mars 2013, 15:25:47
     Author     : Alex
 --%>
+<%@page import="jeu.Room"%>
 <%@page import="session.ConnectivityHandlerInterface"%>
 <%@page import="javax.sound.midi.SysexMessage"%>
 <%@page import="javax.naming.InitialContext"%>
@@ -18,6 +19,9 @@
             System.out.println("JEE sucks");
         }
     }
+    
+    // Room
+    Room r = Room.getInstance();
 %>
 
 <%
@@ -37,7 +41,11 @@
     </head>
     <body>
         <h1>ROOM!</h1>
-        <%        
+        Liste des joueurs connectés :
+        Pseudo      Etat
+        <%  
+            out.println(r.showPlayers());
+            
             String type = (String) request.getParameter("req-type");
             if ("playVsComp".equals(type)) {
                 String redirectURL = "game.jsp";
