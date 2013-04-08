@@ -5,10 +5,31 @@
 --%>
 <%@page import="jeu.*"%>
 <%@page import="javax.naming.InitialContext"%>
+<%@page import="session.ConnectivityHandlerInterface"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
 <%!
     private Game game = new Game();
+%>
+<%!
+    private ConnectivityHandlerInterface connectHandler;
+    
+    public void jspInit() {
+        try {
+            connectHandler = (ConnectivityHandlerInterface) (new InitialContext()).lookup(ConnectivityHandlerInterface.class.getName());
+        } catch (Exception e) {
+            System.out.println("JEE sucks");
+        }
+    }
+%>
+
+<%
+    String nick = (String) session.getAttribute("nick");
+    out.println("Le nick: " + nick);
+    if(!connectHandler.userExists(nick)) {
+        String redirectURL = "index.jsp";
+        response.sendRedirect(redirectURL);
+        return;
+    }
 %>
 
 <!DOCTYPE html>
@@ -20,6 +41,7 @@
     <body>
         
         <%        
+            game.setName(nick, "Computer");
             String computerChoise = null;
             String playerChoise = (String) request.getParameter("req-type");
             if(playerChoise == null) {
@@ -33,12 +55,12 @@
             } else if (compChoise == 2) {
                 computerChoise = "ciseaux";
             }
-            out.println("Player Choise : " + playerChoise + "\n");
+            out.println( nick + "Choise : " + playerChoise + "\n");
             out.println("Computer Choise : " + computerChoise);
             
-            String resultat = game.winner("Player", "Computer", playerChoise, computerChoise);
+            String resultat = game.winner(playerChoise, computerChoise);
             out.println(resultat);
-            
+            if(!game.haveWinner()) {
         %>
         
         <h1>Salle de Jeu !</h1>
@@ -53,6 +75,22 @@
         <form method="POST">
             <input type="hidden" name="req-type" value="ciseaux" />
             <p><input type="submit" name="ciseaux" value="ciseaux" /></p>
+        </form>
+        <% } else {
+        %>
+        <p> Il y a un gagnant !!!! </p>
+        <%        
+            }
+            String type = (String) request.getParameter("req-type");
+            if ("room".equals(type)) {
+                String redirectURL = "room.jsp";
+                response.sendRedirect(redirectURL);
+                return;
+            }
+        %>
+        <form method="POST">
+            <input type="hidden" name="req-type" value="room" />
+            <p><input type="submit" name="returnToTheRoom" value="Return to the room" /></p>
         </form>
     </body>
 </html>

@@ -49,7 +49,7 @@
             <input type="hidden" name="req-type" value="playVsComp" />
             <p><input type="submit" name="gameVsComp" value="Player vs Computer" /></p>
         </form>
-        <form methode="POST">
+        <form method="POST">
             <input type="hidden" name="req-type" value="disconnect" />
             <p><input type="submit" value="Déconnecter" /></p>
         </form>
