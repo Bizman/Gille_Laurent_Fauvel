@@ -12,6 +12,7 @@
 <%@page import="javax.naming.InitialContext"%>
 <%@page import="persistence.Player"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <%!
     private ConnectivityHandlerInterface connectHandler;
     
@@ -38,6 +39,13 @@
         r.Connexion(nick);
     }
 %>
+<%
+    if(connectHandler.getDefiAck(nick)) {
+        String redirectURL = "game.jsp";
+        response.sendRedirect(redirectURL);
+        return;
+    }
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -46,6 +54,21 @@
     </head>
     <body>
         <h1>ROOM!</h1>
+        Liste des joueurs qui vous défi : 
+        <%
+            for(Iterator i = connectHandler.getDefi(nick).iterator(); i.hasNext();) {
+                String nickDef = (String) i.next();
+        %>
+        <ul>
+            <li><% out.print(nickDef);%></li>
+        </ul>
+        <form method="POST">
+            <input type="hidden" name="req-type" value="valider" />
+            <input type="submit" name="gameVsGame" value="Valider !" />
+        </form>        
+        <%
+            }
+        %><p></p>
         Liste des joueurs connectés :
         Pseudo      Etat
         <%  
@@ -54,17 +77,35 @@
             Iterator it = cles.iterator();
             while (it.hasNext()){
                 String nickname = (String) it.next(); 
-                Boolean etat = (Boolean) p.get(nickname);
+                Boolean etatB = (Boolean) p.get(nickname);
+                String etat = "Libre";
+                if(etatB)
+                    etat = "Occupé";
+                if(!nickname.equals(nick)) {
         %>
         <ul>
-            <li><% out.println(nickname + "  " + etat);%></li>
+            <li><% out.print(nickname + " ==> " + etat);%></li>
         </ul>
+        <form method="POST">
+            <input type="hidden" name="req-type" value="playVsplay" />
+            <input type="hidden" name="name-joueur" value="<% out.print(nickname);%>" />
+            <input type="submit" name="gameVsGame" value="Defier <% out.print(nickname); %>" />
+        </form>
         <%
+               }
             }
         %>
         <%   
             String type = (String) request.getParameter("req-type");
+            String name = (String) request.getParameter("name-joueur");
             if ("playVsComp".equals(type)) {
+                String redirectURL = "game.jsp";
+                response.sendRedirect(redirectURL);
+                return;
+            } else if("playVsplay".equals(type)) {
+                out.print(name);
+                connectHandler.addDefi(nick, name);               
+            } else if("valider".equals(type)) {
                 String redirectURL = "game.jsp";
                 response.sendRedirect(redirectURL);
                 return;

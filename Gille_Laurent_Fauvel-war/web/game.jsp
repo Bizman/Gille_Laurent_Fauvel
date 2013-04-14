@@ -55,14 +55,21 @@
             } else if (compChoise == 2) {
                 computerChoise = "ciseaux";
             }
-            out.println( nick + "Choise : " + playerChoise + "\n");
+        %>
+        <p></p>
+        <%
+            out.println( nick + " Choise : " + playerChoise);
+        %>
+        <p></p>
+        <%
             out.println("Computer Choise : " + computerChoise);
-            
+        %>
+        <p></p>
+        <%
             String resultat = game.winner(playerChoise, computerChoise);
-            out.println(resultat);
+            out.print(resultat);
             if(!game.haveWinner()) {
         %>
-        
         <h1>Salle de Jeu !</h1>
         <form method="POST">
             <input type="hidden" name="req-type" value="pierre" />

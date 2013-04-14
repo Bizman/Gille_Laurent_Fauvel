@@ -62,7 +62,7 @@ public class Game {
         if(this.nbWin1 >= 2 || this.nbWin2 >= 2) {
             result += "Game is over !";
         }
-        return result + "GAGNANT" + winner;
+        return result + "GAGNANT : " + winner;
     }
     
     private void winner(String playerWinner) {

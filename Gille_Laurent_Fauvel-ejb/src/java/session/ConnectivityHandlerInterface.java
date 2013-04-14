@@ -4,6 +4,8 @@
  */
 package session;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import javax.ejb.Remote;
 
 /**
@@ -23,5 +25,9 @@ public interface ConnectivityHandlerInterface {
 
     public int connect(String nick, String password);
     public boolean userExists(String nick);
-    public String test();
+    public HashMap getPlayerSession();
+    public void addDefi(String nick, String name);
+    public ArrayList getDefi(String nick);
+    public boolean getDefiAck(String nick);
+    public void setDefiAck(String nick, boolean ack);
 }

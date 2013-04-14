@@ -1,6 +1,7 @@
 package session;
 
 import javax.ejb.*;
+import java.util.ArrayList;
 import javax.persistence.EntityManager;
 
 @Stateless
@@ -9,9 +10,16 @@ public class PlayerSession {
     
     @javax.persistence.PersistenceContext(unitName="PlayerSessionPersistence")
     private EntityManager em;
+    private boolean defiAccept;
+    private String nick;
+    private ArrayList<String> defi;
     
     public PlayerSession() {
-        
+        defi = new ArrayList<String>();
+    }
+    
+    public void setNick(String nick) {
+        this.nick = nick;
     }
     
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -22,5 +30,23 @@ public class PlayerSession {
     
     public void persist(Object obj){
         em.persist(obj);
+    }
+    
+    public void addDefi(String nick) {
+        if(!defi.contains(nick)) {
+            defi.add(nick);
+        }
+    }
+    
+    public ArrayList getDefi() {
+        return defi;
+    }
+    
+    public boolean getDefiAck() {
+        return defiAccept;
+    }
+    
+    public void setDefiAck(boolean ack) {
+        this.defiAccept = ack;
     }
 }
