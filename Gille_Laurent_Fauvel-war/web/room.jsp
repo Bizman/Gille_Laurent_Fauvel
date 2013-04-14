@@ -31,6 +31,8 @@
         String redirectURL = "index.jsp";
         response.sendRedirect(redirectURL);
         return;
+    } else {
+        r.Connexion(nick);
     }
 %>
 <!DOCTYPE html>

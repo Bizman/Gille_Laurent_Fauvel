@@ -45,6 +45,5 @@ public class ConnectivityHandler implements ConnectivityHandlerInterface {
     public String test() {
         System.err.println("Connecté: " + user);
         return user;
-    }
-    
+    }   
 }

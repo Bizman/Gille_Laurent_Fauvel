@@ -23,7 +23,9 @@ public class Room {
      /** Constructeur redéfini comme étant privé pour interdire
     * son appel et forcer à passer par la méthode <link
     */
-    private Room() {    }
+    private Room() {    
+        players = new HashMap<String, Boolean>();
+    }
     
     public static Room getInstance() {
         if (null == room) { // Premier appel
@@ -32,19 +34,18 @@ public class Room {
         return room;
     }
 
-   public void Connexion(Player p){
-       players.put(p.getNickName(), false);
+   public void Connexion(String nick){
+       players.put(nick, false);
    }
    
    public String showPlayers(){
        String list = new String();
-       HashMap map = new HashMap();
-       Set cles = map.keySet();
+       Set cles = this.players.keySet();
        Iterator it = cles.iterator();
        while (it.hasNext()){
             String nickname = (String) it.next(); 
-            Boolean etat = (Boolean) map.get(nickname);
-            list += nickname + "        " + etat + "\n";   
+            Boolean etat = (Boolean) this.players.get(nickname);
+            list += nickname + " " + etat + "\n";   
        }
        return list;
    }

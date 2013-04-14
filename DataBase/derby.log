@@ -1,5 +1,5 @@
-Mon Apr 08 13:53:36 CEST 2013 : Apache Derby Serveur réseau - 10.8.1.2 - (1095077) démarré et prêt à accepter les connexions sur le port 1527
-Mon Apr 08 13:53:52 CEST 2013 Thread[DRDAConnThread_3,5,main] Cleanup action starting
+Sun Apr 14 08:56:34 CEST 2013 : Apache Derby Serveur réseau - 10.8.1.2 - (1095077) démarré et prêt à accepter les connexions sur le port 1527
+Sun Apr 14 08:57:07 CEST 2013 Thread[DRDAConnThread_3,5,main] Cleanup action starting
 java.sql.SQLException: Impossible de trouver la base de données 'myDB'.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.Util.newEmbedSQLException(Unknown Source)
@@ -49,11 +49,11 @@ java.sql.SQLException: Impossible de trouver la base de données 'myDB'.
 	at org.apache.derby.impl.drda.DRDAConnThread.run(Unknown Source)
 ============= end nested exception, level (1) ===========
 Cleanup action completed
-Mon Apr 08 13:53:52 CEST 2013 Thread[DRDAConnThread_3,5,main] (DATABASE = myDB), (DRDAID = {1}), Impossible de trouver la base de données 'myDB'.
+Sun Apr 14 08:57:07 CEST 2013 Thread[DRDAConnThread_3,5,main] (DATABASE = myDB), (DRDAID = {1}), Impossible de trouver la base de données 'myDB'.
 ----------------------------------------------------------------
-Mon Apr 08 13:53:53 CEST 2013:
-Amorçage de Derby version The Apache Software Foundation - Apache Derby - 10.8.1.2 - (1095077) : instance a816c00e-013d-e97e-87e1-ffff93829e3c 
-dans le répertoire de base de données D:\Dropbox\Cours SI4\Serveur_Entreprise\TP\ejb\entreprise\Gille_Laurent_Fauvel\DataBase\Gille_Laurent_Fauvel_DataBase  avec le chargeur de classe sun.misc.Launcher$AppClassLoader@1b1f1f12
+Sun Apr 14 08:57:22 CEST 2013:
+Amorçage de Derby version The Apache Software Foundation - Apache Derby - 10.8.1.2 - (1095077) : instance a816c00e-013e-0754-bd1e-ffff93829e3c 
+dans le répertoire de base de données D:\Dropbox\Cours SI4\Serveur_Entreprise\TP\ejb\entreprise\Gille_Laurent_Fauvel\DataBase\Gille_Laurent_Fauvel_DataBase  avec le chargeur de classe sun.misc.Launcher$AppClassLoader@6d9bf996
 
 java.vendor=Oracle Corporation
 java.runtime.version=1.7.0_15-b03
