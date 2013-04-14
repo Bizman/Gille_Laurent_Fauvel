@@ -49,4 +49,8 @@ public class Room {
        }
        return list;
    }
+   
+   public HashMap showPlayers2() {
+       return this.players;
+   }
 }

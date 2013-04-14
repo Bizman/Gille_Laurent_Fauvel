@@ -4,6 +4,9 @@
     Author     : Alex
 --%>
 <%@page import="jeu.Room"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Set"%>
+<%@page import="java.util.Iterator"%>
 <%@page import="session.ConnectivityHandlerInterface"%>
 <%@page import="javax.sound.midi.SysexMessage"%>
 <%@page import="javax.naming.InitialContext"%>
@@ -46,8 +49,20 @@
         Liste des joueurs connectés :
         Pseudo      Etat
         <%  
-            out.println(r.showPlayers());
-            
+            HashMap<String, Boolean> p = r.showPlayers2();
+            Set cles = p.keySet();
+            Iterator it = cles.iterator();
+            while (it.hasNext()){
+                String nickname = (String) it.next(); 
+                Boolean etat = (Boolean) p.get(nickname);
+        %>
+        <ul>
+            <li><% out.println(nickname + "  " + etat);%></li>
+        </ul>
+        <%
+            }
+        %>
+        <%   
             String type = (String) request.getParameter("req-type");
             if ("playVsComp".equals(type)) {
                 String redirectURL = "game.jsp";
