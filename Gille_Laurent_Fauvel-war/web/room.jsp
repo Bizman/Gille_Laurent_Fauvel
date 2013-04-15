@@ -58,7 +58,7 @@
                 String nickDef = (String) i.next();
         %>
         <ul>
-            <li><% out.print(nickDef);%></li>
+            <li><%= nickDef %></li>
         </ul>
         <form method="POST">
             <input type="hidden" name="req-type" value="valider" />
