@@ -28,7 +28,6 @@
     if(!connectHandler.userExists(nick)) {
         String redirectURL = "index.jsp";
         response.sendRedirect(redirectURL);
-        return;
     }
 %>
 

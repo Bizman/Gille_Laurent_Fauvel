@@ -16,6 +16,7 @@ public class PlayerSession {
     
     public PlayerSession() {
         defi = new ArrayList<String>();
+        nick = new String();
     }
     
     public void setNick(String nick) {

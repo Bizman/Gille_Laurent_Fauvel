@@ -31,9 +31,8 @@
 <%
     String nick = (String) session.getAttribute("nick");
     out.println("Le nick: " + nick);
-    if(!connectHandler.userExists(nick)) {
-        String redirectURL = "index.jsp";
-        response.sendRedirect(redirectURL);
+    if(nick == null) {
+        response.sendRedirect("index.jsp");
         return;
     } else {
         r.Connexion(nick);
@@ -41,8 +40,7 @@
 %>
 <%
     if(connectHandler.getDefiAck(nick)) {
-        String redirectURL = "game.jsp";
-        response.sendRedirect(redirectURL);
+        response.sendRedirect("game.jsp");
         return;
     }
 %>

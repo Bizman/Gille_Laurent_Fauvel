@@ -2,16 +2,18 @@ package session;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import javax.ejb.EJB;
 import javax.ejb.Stateful;
 import javax.persistence.*;
 import persistence.Player;
 
 @Stateful
 public class ConnectivityHandler implements ConnectivityHandlerInterface {
+    @EJB
+    private PlayerSession playerSession;
     
     @PersistenceContext(unitName="PlayerSessionPersistence")
     private EntityManager em;
-    private String user;
     private HashMap<String, PlayerSession> ps;
     
     public ConnectivityHandler() {
@@ -37,20 +39,19 @@ public class ConnectivityHandler implements ConnectivityHandlerInterface {
         if (em.createNamedQuery("verifyUserData").setParameter("nickName", nick).setParameter("password", password).getResultList().isEmpty()) {
             return ConnectivityHandler.BAD_INFO;
         } else {
-            user = nick;
+            if(!ps.containsKey(nick)) {
+                playerSession.setNick(nick);
+                ps.put(nick, playerSession);
+            }
             return ConnectivityHandlerInterface.CONNECTION_OK;
         }
     }
 
     @Override
-    public boolean userExists(String nick) {
-        if(!ps.containsKey(nick)) {
-            PlayerSession newPlayer = new PlayerSession();
-            newPlayer.setNick(nick);
-            ps.put(nick, newPlayer);
-        }   
+    public boolean userExists(String nick) {   
         return em.find(Player.class, nick) != null;
     }
+    
     @Override
     public void addDefi(String nick, String name) {
         if(ps.containsKey(name)) {
@@ -70,10 +71,12 @@ public class ConnectivityHandler implements ConnectivityHandlerInterface {
     public HashMap getPlayerSession() {
         return this.ps;
     }
+    
     @Override
     public boolean getDefiAck(String nick) {
-        if(ps.containsKey(nick))
+        if(ps.containsKey(nick)) {
             return ps.get(nick).getDefiAck();
+        }
         return false;
     }
     

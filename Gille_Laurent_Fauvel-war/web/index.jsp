@@ -69,30 +69,12 @@
                     </form>
                     <%
             }
-            
-            if ("connect".equals(type)) {
-                int r = connectHandler.connect(nick, pwd);
-                
-                if (r == ConnectivityHandlerInterface.BAD_INFO) {
-                    out.println("Utilisateur inconnu. Les données peuvent être erronées.");
-                } else {
-                    out.println("Connexion effectuée.");
-                    session.setAttribute("nick", nick);
-                    String redirectURL = "room.jsp";
-                    response.sendRedirect(redirectURL);
-                    return;
-                }
-            } else {
-        %>
+                    %>
         <h2>Connexion</h2>
-        <form method="POST">
+        <form method="POST" action="connect.jsp">
             <p><label>Login</label><input type="text" name="nick" /></p>
             <p><label>Mot de passe</label><input type="text" name="pwd" /></p>
-            <input type="hidden" name="req-type" value="connect" />
             <p><input type="submit" name="send" value="Envoyer" /></p>
         </form>
-        <%
-               }
-        %>
     </body>
 </html>
