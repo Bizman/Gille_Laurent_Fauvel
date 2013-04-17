@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 @LocalBean
 public class PlayerSession {
     
-    @javax.persistence.PersistenceContext(unitName="PlayerSessionPersistence")
+    @javax.persistence.PersistenceContext(unitName="GamePersistence")
     private EntityManager em;
     private boolean defiAccept;
     private String nick;

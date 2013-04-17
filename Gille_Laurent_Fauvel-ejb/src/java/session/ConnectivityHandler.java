@@ -1,7 +1,5 @@
 package session;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
 import javax.persistence.*;
@@ -9,16 +7,11 @@ import persistence.Player;
 
 @Stateful
 public class ConnectivityHandler implements ConnectivityHandlerInterface {
-    @EJB
-    private PlayerSession playerSession;
     
-    @PersistenceContext(unitName="PlayerSessionPersistence")
+    @PersistenceContext(unitName="GamePersistence")
     private EntityManager em;
-    private HashMap<String, PlayerSession> ps;
     
-    public ConnectivityHandler() {
-        ps = new HashMap<String, PlayerSession>();
-    }
+    public ConnectivityHandler() {}
     
     @Override
     public int subscribe(String nick, String firstName, String lastName, String password, String email) {
@@ -39,10 +32,6 @@ public class ConnectivityHandler implements ConnectivityHandlerInterface {
         if (em.createNamedQuery("verifyUserData").setParameter("nickName", nick).setParameter("password", password).getResultList().isEmpty()) {
             return ConnectivityHandler.BAD_INFO;
         } else {
-            if(!ps.containsKey(nick)) {
-                playerSession.setNick(nick);
-                ps.put(nick, playerSession);
-            }
             return ConnectivityHandlerInterface.CONNECTION_OK;
         }
     }
@@ -50,41 +39,5 @@ public class ConnectivityHandler implements ConnectivityHandlerInterface {
     @Override
     public boolean userExists(String nick) {   
         return em.find(Player.class, nick) != null;
-    }
-    
-    @Override
-    public void addDefi(String nick, String name) {
-        if(ps.containsKey(name)) {
-            PlayerSession tmp = ps.get(name);
-            tmp.addDefi(nick);
-        }
-    }
-    
-    @Override 
-    public ArrayList getDefi(String nick) {
-        if(ps.containsKey(nick)) {
-            return ps.get(nick).getDefi();
-        }
-        return new ArrayList<String>();
-    }
-    @Override
-    public HashMap getPlayerSession() {
-        return this.ps;
-    }
-    
-    @Override
-    public boolean getDefiAck(String nick) {
-        if(ps.containsKey(nick)) {
-            return ps.get(nick).getDefiAck();
-        }
-        return false;
-    }
-    
-    @Override
-    public void setDefiAck(String nick, boolean ack) {
-        if(ps.containsKey(nick)) {
-            PlayerSession tmp = ps.get(nick);
-            tmp.setDefiAck(ack);
-        }
     }
 }

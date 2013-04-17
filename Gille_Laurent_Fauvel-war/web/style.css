@@ -1,0 +1,14 @@
+table {
+    width: 200px;
+    border-collapse: collapse;
+}
+
+td {
+    border: 1px black solid;
+    padding: 7px;
+}
+
+caption {
+    font-family: Calibri;
+    size: 13px;
+}

@@ -2,6 +2,7 @@ package persistence;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import misc.PlayerState;
 
 @Entity
 @NamedQueries(
@@ -19,9 +20,11 @@ public class Player implements Serializable {
     private String password;
     private String mail;
     private int score;
+    
+    @Enumerated(EnumType.STRING)
+    private PlayerState etat;
 
-    public Player() {
-    }
+    public Player() {}
 
     public Player(String firstName, String lastName, String nickName, String password, String mail, int score) {
         this.firstName = firstName;
@@ -55,6 +58,8 @@ public class Player implements Serializable {
     public int getScore() {
         return score;
     }
+    
+    public PlayerState getEtat() { return etat; }
 
     public void setFirstName(String newFirstName) {
         firstName = newFirstName;
