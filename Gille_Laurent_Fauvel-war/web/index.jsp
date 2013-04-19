@@ -5,16 +5,16 @@
 --%>
 
 <%@page import="javax.naming.InitialContext"%>
-<%@page import="session.ConnectivityHandlerInterface"%>
+<%@page import="session.ConnectivityHandler"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%!
-    private ConnectivityHandlerInterface connectHandler = null;
+    private ConnectivityHandler connectHandler = null;
     
     public void jspInit() {
         try {
-            connectHandler = (ConnectivityHandlerInterface) (new InitialContext()).lookup(ConnectivityHandlerInterface.class.getName());
+            connectHandler = (ConnectivityHandler) (new InitialContext()).lookup(ConnectivityHandler.class.getName());
         } catch (Exception ex) {
-            System.err.println("Exception: " + ex.getMessage());
+            System.err.println("index.jsp: Exception: " + ex.getMessage());
         }
     }
 %>
@@ -34,21 +34,21 @@
             String nom = (String) request.getParameter("nom");
             String email = (String) request.getParameter("email");
             String pwd = (String) request.getParameter("pwd");
-            String nick = (String) request.getParameter("nick");
+            String USER_NICK = (String) request.getParameter("USER_NICK");
             String type = (String) request.getParameter("req-type");
             
             if ("subscribe".equals(type)) {
-                if (prenom != null &&  nom != null && email != null &&  pwd != null &&  nick != null) {
+                if (prenom != null &&  nom != null && email != null &&  pwd != null &&  USER_NICK != null) {
 
-                    if (prenom.length() > 0 && email.length() > 0 && pwd.length() > 0 && nom.length() > 0 && nick.length() > 0) {
-                        int r = connectHandler.subscribe(nick, prenom, nom, pwd, email);
+                    if (prenom.length() > 0 && email.length() > 0 && pwd.length() > 0 && nom.length() > 0 && USER_NICK.length() > 0) {
+                        int r = connectHandler.subscribe(USER_NICK, prenom, nom, pwd, email);
 
-                        if (r == ConnectivityHandlerInterface.SUBSCRIBE_OK) {
-                            out.println("Vous êtes inscrit avec le pseudo '" + nick + "'. Vous pouvez vous connecter à votre espace utilisateur.");
+                        if (r == ConnectivityHandler.SUBSCRIBE_OK) {
+                            out.println("Vous êtes inscrit avec le pseudo '" + USER_NICK + "'. Vous pouvez vous connecter à votre espace utilisateur.");
                             
-                        } else if (r == ConnectivityHandlerInterface.NICK_TAKEN) {
+                        } else if (r == ConnectivityHandler.NICK_TAKEN) {
                             out.println("Pseudo déjà utilisé!");
-                        } else if (r == ConnectivityHandlerInterface.MAIL_TAKEN) {
+                        } else if (r == ConnectivityHandler.MAIL_TAKEN) {
                             out.println("Email déjà utilisé!");
                         }
                     } else {
@@ -59,7 +59,7 @@
                     %>
                     <h2>Inscription</h2>
                     <form method="post">
-                        <p><label>Pseudo</label><input type="text" name="nick" /></p>
+                        <p><label>Pseudo</label><input type="text" name="USER_NICK" /></p>
                         <p><label>Prénom</label><input type="text" name="prenom" /></p>
                         <p><label>Nom</label><input type="text" name="nom" /></p>
                         <p><label>Email</label><input type="email" name="email" /></p>
@@ -72,7 +72,7 @@
                     %>
         <h2>Connexion</h2>
         <form method="POST" action="connect.jsp">
-            <p><label>Login</label><input type="text" name="nick" /></p>
+            <p><label>Login</label><input type="text" name="USER_NICK" /></p>
             <p><label>Mot de passe</label><input type="text" name="pwd" /></p>
             <p><input type="submit" name="send" value="Envoyer" /></p>
         </form>

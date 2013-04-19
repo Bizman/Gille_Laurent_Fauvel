@@ -11,6 +11,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.NamedQueries;
 import misc.DefiState;
 
 /**
@@ -18,6 +20,10 @@ import misc.DefiState;
  * @author Alex
  */
 @Entity
+@NamedQueries(
+    value={
+        @NamedQuery(name="waitingDefi", query="SELECT d FROM Defi d WHERE d.player1.nickName <> :me"),
+    })
 public class Defi implements Serializable {
     private static final long serialVersionUID = 1L;
     

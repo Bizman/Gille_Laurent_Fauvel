@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import misc.PlayerState;
 import persistence.Defi;
 import persistence.Player;
 
@@ -40,14 +41,13 @@ public class RoomHandlerBean implements RoomHandler {
     
     @Override
     public List<Player> getPlayers(String myNick) {
-        Query query = em.createQuery("SELECT p FROM Player p WHERE p.nickName <> :me").setParameter("me", myNick);
-        System.err.println("CALLED: " + query.getFirstResult());
+        Query query = em.createNamedQuery("getConnectedPlayers").setParameter("etat", PlayerState.DISCONNECTED).setParameter("me", myNick);
         return query.getResultList();
     }
     
     @Override
-    public List<Defi> getDefi() {
-        Query query = em.createQuery("SELECT d FROM Defi d;");
+    public List<Defi> getDefi(String myNick) {
+        Query query = em.createNamedQuery("waitingDefi").setParameter("me", myNick);
         return query.getResultList();
     }
 }

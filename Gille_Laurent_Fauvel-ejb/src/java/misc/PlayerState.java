@@ -9,6 +9,7 @@ package misc;
  * @author Alex
  */
 public enum PlayerState {
-    LIBRE,
-    OCCUPE
+    CONNECTED,
+    PLAYING,
+    DISCONNECTED
 };

@@ -4,15 +4,15 @@
     Author     : Alex
 --%>
 
+<%@page import="session.ConnectivityHandler"%>
 <%@page import="javax.naming.InitialContext"%>
-<%@page import="session.ConnectivityHandlerInterface"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%!
-    private ConnectivityHandlerInterface connectHandler = null;
+    private ConnectivityHandler connectHandler = null;
     
     public void jspInit() {
         try {
-            connectHandler = (ConnectivityHandlerInterface) (new InitialContext()).lookup(ConnectivityHandlerInterface.class.getName());
+            connectHandler = (ConnectivityHandler) (new InitialContext()).lookup(ConnectivityHandler.class.getName());
         } catch (Exception ex) {
             System.err.println("Exception: " + ex.getMessage());
         }
@@ -20,21 +20,21 @@
 %>
 
 <%
-    boolean connected;
-    String nick = (String) request.getParameter("nick");
+    int retourConnexion;
+    String USER_NICK = (String) request.getParameter("USER_NICK");
     String pwd = (String) request.getParameter("pwd");
     
     // Si l'utilisateur est déjà connecté
-    if (session.getAttribute("nick") != null) {
+    if (session.getAttribute("USER_NICK") != null) {
         response.sendRedirect("room.jsp");
     }
     
     // Si les champs sont vides on redirigie vers la page de connexion
-    if (nick == null || pwd == null) {
+    if (USER_NICK == null || pwd == null) {
         response.sendRedirect("index.jsp");
     }
 
-    connected = (connectHandler.connect(nick, pwd) == ConnectivityHandlerInterface.CONNECTION_OK);
+    retourConnexion = connectHandler.connect(USER_NICK, pwd);
 %>
 <!DOCTYPE html>
 <html>
@@ -46,17 +46,19 @@
     <body>
         <h2>Connexion à votre compte</h2>
         <%
-           if (connected) {
-               session.setAttribute("nick", nick);
+           if (retourConnexion == ConnectivityHandler.CONNECTION_OK) {
+               session.setAttribute("USER_NICK", USER_NICK);
         %>
-               <p>Bienvenue <strong><%= nick %></strong>!</p>
+               <p>Bienvenue <strong><%= USER_NICK %></strong>!</p>
                <p>Vous allez être redirigé vers votre espace personnel dans 2 secondes</p>  
+        <%
+           } else if (retourConnexion == ConnectivityHandler.ALREADY_CONNECTED) {
+        %>
+               <p>L'utilisateur <strong><%= USER_NICK %></strong> est déjà connecté à partir d'un autre ordinateur</p>
         <%
            } else {
         %>
-               <p>L'utilisateur <strong><%= nick %></strong> n'existe pas</p>
-        <%
-           }
-        %>
+                <p>L'utilisateur <strong><%= USER_NICK %></strong> n'existe pas</p>
+        <% } %>
     </body>
 </html>

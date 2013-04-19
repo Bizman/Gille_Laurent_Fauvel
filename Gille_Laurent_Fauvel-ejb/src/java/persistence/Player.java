@@ -3,12 +3,15 @@ package persistence;
 import java.io.Serializable;
 import javax.persistence.*;
 import misc.PlayerState;
+import javax.persistence.NamedQuery;
+import javax.persistence.NamedQueries;
 
 @Entity
 @NamedQueries(
     value={
         @NamedQuery(name="checkEmail", query="SELECT p FROM Player p WHERE p.mail = :mail"),
-        @NamedQuery(name="verifyUserData", query="SELECT p FROM Player p WHERE p.nickName = :nickName AND p.password = :password")
+        @NamedQuery(name="verifyUserData", query="SELECT p FROM Player p WHERE p.nickName = :nickName AND p.password = :password"),
+        @NamedQuery(name="getConnectedPlayers", query="SELECT p FROM Player p WHERE p.etat <> :etat AND p.nickName <> :me")
     })
 public class Player implements Serializable {
 
@@ -33,6 +36,7 @@ public class Player implements Serializable {
         this.nickName = nickName;
         this.password = password;
         this.score = score;
+        this.etat = PlayerState.DISCONNECTED;
     }
 
     public String getFirstName() {
@@ -83,5 +87,9 @@ public class Player implements Serializable {
 
     public void setScore(int newScore) {
         score = newScore;
+    }
+    
+    public void setState(PlayerState etat) {
+        this.etat = etat;
     }
 }

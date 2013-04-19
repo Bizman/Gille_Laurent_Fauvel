@@ -11,7 +11,7 @@
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Set"%>
 <%@page import="java.util.Iterator"%>
-<%@page import="session.ConnectivityHandlerInterface"%>
+<%@page import="session.ConnectivityHandler"%>
 <%@page import="javax.sound.midi.SysexMessage"%>
 <%@page import="javax.naming.InitialContext"%>
 <%@page import="persistence.Player"%>
@@ -34,17 +34,37 @@
 
 <%
     // Rédirection si non connecté
-    String nick = (String) session.getAttribute("nick");
-    if(nick == null) {
+    String USER_NICK = (String) session.getAttribute("USER_NICK");
+    if(USER_NICK == null) {
         response.sendRedirect("index.jsp");
         return;
     }
     
     // Récupération des joueur en ligne
-    List<Player> connectedPlayersList = roomHandler.getPlayers(nick);
+    List<Player> connectedPlayersList = roomHandler.getPlayers(USER_NICK);
     
     // Récupération des défi
-    List<Defi> defiList = roomHandler.getDefi();
+    List<Defi> defiList = roomHandler.getDefi(USER_NICK);
+%>
+
+<%
+    String action = (String) request.getParameter("action");
+    
+    if (action != null) {
+        if ("defier".equals(action)) {
+            String opponent = (String) request.getParameter("opponent");
+
+            if (opponent != null && !opponent.isEmpty()) {
+                roomHandler.defier(USER_NICK, opponent);
+            }
+        } else if ("accepter-defi".equals(action)) {
+            String did = (String) request.getParameter("did");
+            
+            if (did != null && !did.isEmpty()) {
+                out.write(USER_NICK + " accepte le défi " + did);
+            }
+        }
+    }
 %>
 <!DOCTYPE html>
 <html>
@@ -52,11 +72,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>O. Fauvel - A. Gille - A. Laurent - SI4 2013</title>
         <link rel="stylesheet" href="style.css" type="text/css" />
-        <script>window.setTimeout("location.reload(true);", 10000);</script>
+        <!--<script>window.setTimeout("location = 'room.jsp';", 10000);</script>-->
     </head>
     <body>
         <h1>ROOM!</h1>
-        <h2>Bienvenue <%= nick %>!</h2>
+        <h2>Bienvenue <%= USER_NICK %>!</h2>
         
         <table>
             <caption>Vos défis</caption>
@@ -95,7 +115,7 @@
             <tr>
                 <td><%= p.getNickName() %></td>
                 <td><%= p.getEtat() %></td>
-                <td><a href="?action=defier&player=<%= p.getNickName() %>">Défier</a></td>
+                <td><a href="room.jsp?action=defier&opponent=<%= p.getNickName() %>">Défier</a></td>
             </tr>
         <% }
 
@@ -115,6 +135,6 @@
         %>
         </table>
         <p><a href="?action=pvc">Joueur contre l'ordinateur</a></p>
-        <p><a href="disconnect.jsp">Déconnecter</a></p>
+        <p><a href="logout.jsp">Déconnecter</a></p>
     </body>
 </html>

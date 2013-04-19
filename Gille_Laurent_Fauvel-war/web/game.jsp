@@ -5,17 +5,17 @@
 --%>
 <%@page import="jeu.*"%>
 <%@page import="javax.naming.InitialContext"%>
-<%@page import="session.ConnectivityHandlerInterface"%>
+<%@page import="session.ConnectivityHandler"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%!
     private Game game = new Game();
 %>
 <%!
-    private ConnectivityHandlerInterface connectHandler;
+    private ConnectivityHandler connectHandler;
     
     public void jspInit() {
         try {
-            connectHandler = (ConnectivityHandlerInterface) (new InitialContext()).lookup(ConnectivityHandlerInterface.class.getName());
+            connectHandler = (ConnectivityHandler) (new InitialContext()).lookup(ConnectivityHandler.class.getName());
         } catch (Exception e) {
             System.out.println("JEE sucks");
         }
@@ -23,9 +23,9 @@
 %>
 
 <%
-    String nick = (String) session.getAttribute("nick");
-    out.println("Le nick: " + nick);
-    if(!connectHandler.userExists(nick)) {
+    String USER_NICK = (String) session.getAttribute("USER_NICK");
+    out.println("Le USER_NICK: " + USER_NICK);
+    if(!connectHandler.userExists(USER_NICK)) {
         String redirectURL = "index.jsp";
         response.sendRedirect(redirectURL);
     }
@@ -40,7 +40,7 @@
     <body>
         
         <%        
-            game.setName(nick, "Computer");
+            game.setName(USER_NICK, "Computer");
             String computerChoise = null;
             String playerChoise = (String) request.getParameter("req-type");
             if(playerChoise == null) {
@@ -57,7 +57,7 @@
         %>
         <p></p>
         <%
-            out.println( nick + " Choise : " + playerChoise);
+            out.println( USER_NICK + " Choise : " + playerChoise);
         %>
         <p></p>
         <%
