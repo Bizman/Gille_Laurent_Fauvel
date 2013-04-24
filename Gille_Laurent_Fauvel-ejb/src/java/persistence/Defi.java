@@ -22,7 +22,8 @@ import misc.DefiState;
 @Entity
 @NamedQueries(
     value={
-        @NamedQuery(name="waitingDefi", query="SELECT d FROM Defi d WHERE d.player1.nickName <> :me")
+        @NamedQuery(name="waitingDefi", query="SELECT d FROM Defi d WHERE d.player2.nickName = :me"),
+        @NamedQuery(name="getDefi", query="SELECT d FROM Defi d WHERE d.id = :id")
     })
 public class Defi implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -53,6 +54,7 @@ public class Defi implements Serializable {
     public DefiState getEtat() { return etat; }
     public Player getFirstPlayer() { return player1; }
     public Player getSecondPlayer() { return player2; }
+    public void setEtat() { this.etat =  DefiState.VALIDE;}
 
     @Override
     public int hashCode() {
