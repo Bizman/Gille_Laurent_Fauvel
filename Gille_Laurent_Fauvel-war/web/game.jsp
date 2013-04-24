@@ -5,6 +5,8 @@
 --%>
 <%@page import="jeu.*"%>
 <%@page import="javax.naming.InitialContext"%>
+<%@page import="session.RoomHandler"%>
+<%@page import="persistence.Defi"%>
 <%@page import="session.ConnectivityHandler"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%!
@@ -12,10 +14,12 @@
 %>
 <%!
     private ConnectivityHandler connectHandler;
+    private RoomHandler roomHandler;
     
     public void jspInit() {
         try {
             connectHandler = (ConnectivityHandler) (new InitialContext()).lookup(ConnectivityHandler.class.getName());
+            roomHandler = (RoomHandler) (new InitialContext()).lookup(RoomHandler.class.getName());
         } catch (Exception e) {
             System.out.println("JEE sucks");
         }
@@ -23,12 +27,20 @@
 %>
 
 <%
-    String USER_NICK = (String) session.getAttribute("USER_NICK");
-    out.println("Le USER_NICK: " + USER_NICK);
-    if(!connectHandler.userExists(USER_NICK)) {
+    String id = (String) request.getParameter("id");
+    Defi d = roomHandler.getDefi(Long.parseLong(id));
+    String Player1 = (String) session.getAttribute("USER_NICK");
+    String Player2;
+    
+    if(d.getFirstPlayer().getNickName().equals(Player1))
+        Player2=d.getSecondPlayer().getNickName();
+    else Player2=d.getFirstPlayer().getNickName();
+    
+    out.println("Vous: " + Player1 + "\n Votre adversaire: " + Player2 + "\n");
+    /*if(!connectHandler.userExists(Player1)) {
         String redirectURL = "index.jsp";
         response.sendRedirect(redirectURL);
-    }
+    }*/
 %>
 
 <!DOCTYPE html>
@@ -40,28 +52,22 @@
     <body>
         
         <%        
-            game.setName(USER_NICK, "Computer");
-            String computerChoise = null;
-            String playerChoise = (String) request.getParameter("req-type");
-            if(playerChoise == null) {
-                playerChoise = "Null";
+            game.setName(Player1, "Player2");
+            String player1Choise = (String) request.getParameter("req-type");
+            if(player1Choise == null) {
+                player1Choise = "Null";
             }
-            int compChoise = (int) (Math.random() * 3);
-            if(compChoise == 0){
-                computerChoise = "pierre";
-            } else if (compChoise == 1) {
-                computerChoise = "feuille";
-            } else if (compChoise == 2) {
-                computerChoise = "ciseaux";
-            }
+            
+            
+            
         %>
         <p></p>
         <%
-            out.println( USER_NICK + " Choise : " + playerChoise);
+            out.println("Mon choix : " + player1Choise);
         %>
         <p></p>
         <%
-            out.println("Computer Choise : " + computerChoise);
+            out.println("Son choix : " + computerChoise);
         %>
         <p></p>
         <%
@@ -90,6 +96,7 @@
             String type = (String) request.getParameter("req-type");
             if ("room".equals(type)) {
                 String redirectURL = "room.jsp";
+                
                 response.sendRedirect(redirectURL);
                 return;
             }

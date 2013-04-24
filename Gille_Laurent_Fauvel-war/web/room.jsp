@@ -44,7 +44,7 @@
     List<Player> connectedPlayersList = roomHandler.getPlayers(USER_NICK);
     
     // Récupération des défi
-    List<Defi> defiList = roomHandler.getDefi(USER_NICK);
+    List<Defi> defiList = roomHandler.getDefis(USER_NICK);
 %>
 
 <%
@@ -53,15 +53,23 @@
     if (action != null) {
         if ("defier".equals(action)) {
             String opponent = (String) request.getParameter("opponent");
-
+            long id = 0;
             if (opponent != null && !opponent.isEmpty()) {
-                roomHandler.defier(USER_NICK, opponent);
+                id = roomHandler.defier(USER_NICK, opponent);
             }
+            response.sendRedirect("waiting.jsp?id="+id);
+            
         } else if ("accepter-defi".equals(action)) {
             String did = (String) request.getParameter("did");
             
             if (did != null && !did.isEmpty()) {
-                out.write(USER_NICK + " accepte le défi " + did);
+                //out.write(USER_NICK + " accepte le défi " + did);
+                Defi d = roomHandler.getDefi(Long.parseLong(did));
+                out.write(" id   " + did + "    " + d.getId() + "   " + d.getEtat());
+                roomHandler.accepterDefi(Long.parseLong(did));
+                out.write(" id   " + did + "    " + d.getId() + "   " + d.getEtat());
+                d = roomHandler.getDefi(Long.parseLong(did));
+                response.sendRedirect("game.jsp?id="+did);      
             }
         }
     }
@@ -95,7 +103,8 @@
         <tr>
             <td><%= d.getSecondPlayer().getNickName() %></td>
             <td><%= d.getSecondPlayer().getScore() %></td>
-            <td><a href="?action=accepter-defi&did=<%= d.getId() %>">Accepter</a></td>
+            <!--<td><a href="?action=accepter-defi&did=<%= d.getId() %>">Accepter</a></td>-->
+            <td><a href="?action=accepter-defi&did=<%= d.getId() %>">Accepter</a>
         </tr>
 
         <%
