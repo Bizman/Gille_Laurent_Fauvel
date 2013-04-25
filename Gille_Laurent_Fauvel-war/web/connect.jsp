@@ -1,9 +1,3 @@
-<%-- 
-    Document   : connect
-    Created on : 15 avr. 2013, 10:21:27
-    Author     : Alex
---%>
-
 <%@page import="session.ConnectivityHandler"%>
 <%@page import="javax.naming.InitialContext"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
