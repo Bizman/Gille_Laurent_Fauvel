@@ -79,7 +79,7 @@
                 <h2>Connexion</h2>
                 <form method="POST" action="connect.jsp">
                     <p><label>Login</label><input type="text" name="USER_NICK" /></p>
-                    <p><label>Mot de passe</label><input type="text" name="pwd" /></p>
+                    <p><label>Mot de passe</label><input type="password" name="pwd" /></p>
                     <p><input type="submit" name="send" value="Envoyer" /></p>
                 </form>
             </div>
