@@ -17,6 +17,7 @@
             System.err.println("index.jsp: Exception: " + ex.getMessage());
         }
     }
+       
 %>
 <!DOCTYPE html>
 <html>
@@ -29,7 +30,7 @@
     </head>
     <body>
         <h1>Bienvenue!</h1>
-        <%
+        <%      
             String prenom = (String) request.getParameter("prenom");
             String nom = (String) request.getParameter("nom");
             String email = (String) request.getParameter("email");
