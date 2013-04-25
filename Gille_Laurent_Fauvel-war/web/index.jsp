@@ -23,12 +23,14 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>O. Fauvel - A. Gille - A. Laurent - SI4 2013</title>
-        <style type="text/css">
-            
-        </style>
+        <link rel="stylesheet" href="style.css" />
     </head>
     <body>
-        <h1>Bienvenue!</h1>
+        <div id="header">
+            <h1>Pierre # Feuille # Ciseaux</h1>
+            <p> > A. Gille, A. Laurent, O. Fauvel-Jaeger</p>
+        </div>   
+        <div id="body-wrap">
         <%
             String prenom = (String) request.getParameter("prenom");
             String nom = (String) request.getParameter("nom");
@@ -57,24 +59,29 @@
                 } 
             } else {
                     %>
-                    <h2>Inscription</h2>
-                    <form method="post">
-                        <p><label>Pseudo</label><input type="text" name="USER_NICK" /></p>
-                        <p><label>Prénom</label><input type="text" name="prenom" /></p>
-                        <p><label>Nom</label><input type="text" name="nom" /></p>
-                        <p><label>Email</label><input type="email" name="email" /></p>
-                        <p><label>Mot de passe</label><input type="password" name="pwd" /></p>
-                        <input type="hidden" name="req-type" value="subscribe" />
-                        <p><input type="submit" name="send" value="Envoyer" /></p>
-                    </form>
+                    <div id="" class="form-box">
+                        <h2>Inscription</h2>
+                        <form method="post">
+                            <p><label>Pseudo</label><input type="text" name="USER_NICK" /></p>
+                            <p><label>Prénom</label><input type="text" name="prenom" /></p>
+                            <p><label>Nom</label><input type="text" name="nom" /></p>
+                            <p><label>Email</label><input type="email" name="email" /></p>
+                            <p><label>Mot de passe</label><input type="password" name="pwd" /></p>
+                            <input type="hidden" name="req-type" value="subscribe" />
+                            <p><input type="submit" name="send" value="Envoyer" /></p>
+                        </form>
+                    </div>
                     <%
             }
                     %>
-        <h2>Connexion</h2>
-        <form method="POST" action="connect.jsp">
-            <p><label>Login</label><input type="text" name="USER_NICK" /></p>
-            <p><label>Mot de passe</label><input type="text" name="pwd" /></p>
-            <p><input type="submit" name="send" value="Envoyer" /></p>
-        </form>
+            <div id="" class="form-box">
+                <h2>Connexion</h2>
+                <form method="POST" action="connect.jsp">
+                    <p><label>Login</label><input type="text" name="USER_NICK" /></p>
+                    <p><label>Mot de passe</label><input type="text" name="pwd" /></p>
+                    <p><input type="submit" name="send" value="Envoyer" /></p>
+                </form>
+            </div>
+        </div>
     </body>
 </html>
