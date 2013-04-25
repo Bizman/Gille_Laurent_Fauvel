@@ -101,8 +101,8 @@
         <%      for (Defi d : defiList) { %>
 
         <tr>
-            <td><%= d.getSecondPlayer().getNickName() %></td>
-            <td><%= d.getSecondPlayer().getScore() %></td>
+            <td><%= d.getFirstPlayer().getNickName() %></td>
+            <td><%= d.getFirstPlayer().getScore() %></td>
             <!--<td><a href="?action=accepter-defi&did=<%= d.getId() %>">Accepter</a></td>-->
             <td><a href="?action=accepter-defi&did=<%= d.getId() %>">Accepter</a>
         </tr>

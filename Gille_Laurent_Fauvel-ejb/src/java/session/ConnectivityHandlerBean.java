@@ -54,4 +54,6 @@ public class ConnectivityHandlerBean implements ConnectivityHandler {
     public void disconnect(String nick) {
         em.find(Player.class, nick).setState(PlayerState.DISCONNECTED);
     }
+    
+    
 }
