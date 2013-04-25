@@ -24,7 +24,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>O. Fauvel - A. Gille - A. Laurent - SI4 2013</title>
-        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="css/style.css" />
     </head>
     <body>
         <div id="header">

@@ -64,6 +64,8 @@ h2 {
 .form-box h2 {
     margin: 8px 0;
     text-align: center;
+    color: #666;
+    text-shadow: 1px 1px #efefef;
 }
 
 .form-box p {
@@ -90,11 +92,11 @@ label {
 
 @font-face {
     font-family: 'QuicksandLight';
-    src: url('fonts/Quicksand_Light-webfont.eot');
-    src: url('fonts/Quicksand_Light-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/Quicksand_Light-webfont.woff') format('woff'),
-         url('fonts/Quicksand_Light-webfont.ttf') format('truetype'),
-         url('fonts/Quicksand_Light-webfont.svg#QuicksandLight') format('svg');
+    src: url('../fonts/Quicksand_Light-webfont.eot');
+    src: url('../fonts/Quicksand_Light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Quicksand_Light-webfont.woff') format('woff'),
+         url('../fonts/Quicksand_Light-webfont.ttf') format('truetype'),
+         url('../fonts/Quicksand_Light-webfont.svg#QuicksandLight') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -102,11 +104,11 @@ label {
 
 @font-face {
     font-family: 'SambaRegular';
-    src: url('fonts/Samba-webfont.eot');
-    src: url('fonts/Samba-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/Samba-webfont.woff') format('woff'),
-         url('fonts/Samba-webfont.ttf') format('truetype'),
-         url('fonts/Samba-webfont.svg#SambaRegular') format('svg');
+    src: url('../fonts/Samba-webfont.eot');
+    src: url('../fonts/Samba-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Samba-webfont.woff') format('woff'),
+         url('../fonts/Samba-webfont.ttf') format('truetype'),
+         url('../fonts/Samba-webfont.svg#SambaRegular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
