@@ -85,8 +85,8 @@ public class Player implements Serializable {
         mail = newMail;
     }
 
-    public void setScore(int newScore) {
-        score = newScore;
+    public void setScore() {
+        score ++;
     }
     
     public void setState(PlayerState etat) {

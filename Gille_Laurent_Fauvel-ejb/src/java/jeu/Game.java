@@ -4,8 +4,17 @@
  */
 package jeu;
 
+import javax.ejb.Stateful;
+
 public class Game {
-    private enum choise { pierre, feuille, ciseaux };
+    
+    private int val;
+    
+    public Game(){
+        val = 0;
+    }
+    
+    /*private enum choise { pierre, feuille, ciseaux };
     private int nbGame;
     private String player1;
     private String player2;
@@ -80,5 +89,5 @@ public class Game {
     
     private void nbGameIncr() {
         this.nbGame ++;
-    }
+    }*/
 }

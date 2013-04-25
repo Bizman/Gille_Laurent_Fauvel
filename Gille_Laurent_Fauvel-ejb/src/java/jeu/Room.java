@@ -1,5 +1,6 @@
 package jeu;
 
+import session.GameHandlerBean;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -16,7 +17,7 @@ public class Room {
 
     private HashMap<String, Boolean> players;
     //private List<Player> players;
-    private List<Game> games;
+    private List<GameHandlerBean> games;
      /** L'instance statique */
     private static Room room;
     
