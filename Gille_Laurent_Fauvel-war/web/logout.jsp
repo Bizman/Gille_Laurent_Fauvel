@@ -1,9 +1,3 @@
-<%-- 
-    Document   : disconnect
-    Created on : 18 avr. 2013, 18:12:20
-    Author     : Alex
---%>
-
 <%@page import="session.ConnectivityHandler"%>
 <%@page import="javax.naming.InitialContext"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -33,6 +27,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Gille - Laurent - Fauvel - Déconnexion</title>
     </head>
+    <script>window.setTimeout("location = 'index.jsp';", 3000);</script>
     <body>
         <h1>Déconnecté</h1>
         <p>Vous êtes maintenant déconnecté. Au revoir.</p>

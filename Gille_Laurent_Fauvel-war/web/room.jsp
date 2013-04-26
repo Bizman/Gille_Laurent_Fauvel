@@ -1,9 +1,3 @@
-<%-- 
-    Document   : room
-    Created on : 19 mars 2013, 15:25:47
-    Author     : Alex
---%>
-
 <%@page import="java.util.List"%>
 <%@page import="persistence.Defi"%>
 <%@page import="session.RoomHandler"%>
@@ -54,11 +48,12 @@
         if ("defier".equals(action)) {
             String opponent = (String) request.getParameter("opponent");
             long id = 0;
-            if (opponent != null && !opponent.isEmpty()) {
-                id = roomHandler.defier(USER_NICK, opponent);
-            }
-            response.sendRedirect("waiting.jsp?id="+id);
-            
+            id = roomHandler.defier(USER_NICK, opponent);
+            if (opponent != null && !opponent.isEmpty() && opponent.equals("computer")) {
+                response.sendRedirect("game.jsp?id="+id);
+            } else if (opponent != null && !opponent.isEmpty()) {
+                response.sendRedirect("waiting.jsp?id="+id);
+            }            
         } else if ("accepter-defi".equals(action)) {
             String did = (String) request.getParameter("did");
             
@@ -80,11 +75,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>O. Fauvel - A. Gille - A. Laurent - SI4 2013</title>
         <link rel="stylesheet" href="style.css" type="text/css" />
-        <!--<script>window.setTimeout("location = 'room.jsp';", 10000);</script>-->
     </head>
+    <script>window.setTimeout("location = 'room.jsp';", 3000);</script>
     <body>
         <h1>ROOM!</h1>
-        <h2>Bienvenue <%= USER_NICK %>! Tessssttt !! </h2>
+        <h2>Bienvenue <%= USER_NICK %>!</h2>
         
         <table>
             <caption>Vos défis</caption>
@@ -103,7 +98,6 @@
         <tr>
             <td><%= d.getFirstPlayer().getNickName() %></td>
             <td><%= d.getFirstPlayer().getScore() %></td>
-            <!--<td><a href="?action=accepter-defi&did=<%= d.getId() %>">Accepter</a></td>-->
             <td><a href="?action=accepter-defi&did=<%= d.getId() %>">Accepter</a>
         </tr>
 
@@ -126,24 +120,11 @@
                 <td><%= p.getEtat() %></td>
                 <td><a href="room.jsp?action=defier&opponent=<%= p.getNickName() %>">Défier</a></td>
             </tr>
-        <% }
-
-            String type = (String) request.getParameter("req-type");
-            String name = (String) request.getParameter("name-joueur");
-            if ("playVsComp".equals(type)) {
-                String redirectURL = "game.jsp";
-                response.sendRedirect(redirectURL);
-                return;
-            } else if("playVsplay".equals(type)) {
-                out.print(name);            
-            } else if("valider".equals(type)) {
-                String redirectURL = "game.jsp";
-                response.sendRedirect(redirectURL);
-                return;
+        <% 
             }
         %>
         </table>
-        <p><a href="?action=pvc">Joueur contre l'ordinateur</a></p>
+        <p><a href="room.jsp?action=defier&opponent=computer">Jouer contre l'ordinateur</a></p>
         <p><a href="logout.jsp">Déconnecter</a></p>
     </body>
 </html>

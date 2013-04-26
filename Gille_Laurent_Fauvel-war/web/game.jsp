@@ -16,7 +16,7 @@
             roomHandler = (RoomHandler) (new InitialContext()).lookup(RoomHandler.class.getName());
             gamehandler = (GameHandler) (new InitialContext()).lookup(GameHandler.class.getName());
         } catch (Exception e) {
-            System.out.println("JEE sucks");
+            System.out.println("game.jsp init exception: " + e.getMessage());
         }
     }
 %>
@@ -34,8 +34,6 @@
     if( user.equals(Player1))
         opponent = Player2;
        else opponent = Player1;
-    
-    out.println("Vous: " + user + "     Score :" + gamehandler.getScore(user) + "\n Votre adversaire: " + opponent + "     Score :" + gamehandler.getScore(opponent) +"\n");
 %>
 
 <!DOCTYPE html>
@@ -45,17 +43,36 @@
         <title>O. Fauvel - A. Gille - A. Laurent - SI4 2013</title>
     </head>
     <body>
-        
-        <%        
+        <%
+            out.println("Vous: " + user + " Score :" + gamehandler.getScore(user));
+        %>
+        <p></p>
+        <%
+            out.println("Votre adversaire: " + opponent + " Score :" + gamehandler.getScore(opponent));
+   
             gamehandler.setPlayers(Player1, Player2);
-            
-            String choix = (String) request.getParameter("req-type");
-            if(choix == null) 
-                choix = "";
-            else {
-                gamehandler.setChoix(choix, user);
+            String choix = "";
+            String computerChoise = "";
+            if (opponent.equals("computer")) {
+                int choise = (int) Math.round(Math.random()*2);      
+                if (choise == 0) {
+                    computerChoise = "pierre";
+                } else if (choise == 1) {
+                    computerChoise = "feuille";
+                } else if (choise == 2) {
+                    computerChoise = "ciseaux";
+                }
+                gamehandler.setChoix(computerChoise, "computer");
+            } 
+            choix = (String) request.getParameter("req-type");
+            if (choix != null) {
+                if (choix.equals("backToRoom")) {
+                    response.sendRedirect("room.jsp");
+                    roomHandler.removeDefi(d);
+                } else {
+                    gamehandler.setChoix(choix, user);
+                }
             }
-
         %>
         <p></p>
         <%
@@ -67,7 +84,7 @@
         %>
         <p></p>
          <%
-            out.println("Tour : " + gamehandler.getChoix(opponent));
+            out.println("Tour : " + gamehandler.getTour());
         %>
         <p></p>
         <%
@@ -87,8 +104,8 @@
             <input type="hidden" name="req-type" value="ciseaux" />
             <p><input type="submit" name="ciseaux" value="ciseaux" /></p>
         </form>
-        <% }
-            else {
+        <%
+            } else {
         %>
         <h1> Partie terminée </h1>
         <p></p>
@@ -101,19 +118,17 @@
         <p></p>
         <%       
                         } else {  
-                    gamehandler.end(opponent);                     
+                            gamehandler.end(opponent);                     
         %>
-        <h2> Vous avez perdu !  </h2>
-        <p></p>
+        <h2> Vous avez perdu ! </h2>
         <%       
                         }
                 }
            }
         %>
-       
         <form method="POST">
-            <input type="hidden" name="req-type" value="room" />
-            <p><input type="submit" name="returnToTheRoom" value="Return to the room" /></p>
+            <input type="hidden" name="req-type" value="backToRoom" />
+            <p><input type="submit" name="backToRoom" value="Return to the room" /></p>
         </form>
     </body>
 </html>
