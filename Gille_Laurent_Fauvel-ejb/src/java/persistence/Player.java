@@ -28,6 +28,16 @@ public class Player implements Serializable {
     private PlayerState etat;
 
     public Player() {}
+    
+    public Player(String nickName) {
+        this.nickName = nickName;
+        this.firstName = "test";
+        this.lastName = "test";
+        this.mail = "test";
+        this.password = "test";
+        this.score = 0;
+        this.etat = PlayerState.CONNECTED;
+    }
 
     public Player(String firstName, String lastName, String nickName, String password, String mail, int score) {
         this.firstName = firstName;

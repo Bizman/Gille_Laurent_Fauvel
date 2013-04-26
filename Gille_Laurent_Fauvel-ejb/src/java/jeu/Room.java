@@ -5,19 +5,12 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import persistence.Player;
-import session.PlayerSession;
+
 
 public class Room {
 
     private HashMap<String, Boolean> players;
-    //private List<Player> players;
-    private List<GameHandlerBean> games;
+    //private List<GameHandlerBean> games;
      /** L'instance statique */
     private static Room room;
     

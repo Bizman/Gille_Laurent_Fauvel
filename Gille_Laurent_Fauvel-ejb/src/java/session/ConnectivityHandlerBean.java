@@ -19,6 +19,11 @@ public class ConnectivityHandlerBean implements ConnectivityHandler {
     public int subscribe(String nick, String firstName, String lastName, String password, String email) {
         Player p = new Player(firstName, lastName, nick, password, email, 0);
         
+        //Si le joueur "ordinateur" n'existe pas dans la base
+        if (em.find(Player.class, "computer") == null) {
+            Player computer = new Player("computer");
+            em.persist(computer);
+        }
         if (em.find(Player.class, nick) != null) {
             return ConnectivityHandlerBean.NICK_TAKEN;
         } else if (!em.createNamedQuery("checkEmail").setParameter("mail", email).getResultList().isEmpty()) {
@@ -53,7 +58,5 @@ public class ConnectivityHandlerBean implements ConnectivityHandler {
     @Override
     public void disconnect(String nick) {
         em.find(Player.class, nick).setState(PlayerState.DISCONNECTED);
-    }
-    
-    
+    }    
 }

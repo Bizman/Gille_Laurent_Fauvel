@@ -109,7 +109,7 @@ public class GameHandlerBean implements GameHandler {
        } 
    }
     
-     @Override
+   @Override
    public void end(String nick){
          if(end == false){
             end = true;

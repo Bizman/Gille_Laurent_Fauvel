@@ -48,7 +48,7 @@ public class Defi implements Serializable {
         player2 = p2;
         etat = DefiState.ATTENTE;
     }
-    
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id;}
     public DefiState getEtat() { return etat; }
@@ -79,6 +79,5 @@ public class Defi implements Serializable {
     @Override
     public String toString() {
         return "persistence.Defi[ id=" + id + " ]";
-    }
-    
+    }    
 }

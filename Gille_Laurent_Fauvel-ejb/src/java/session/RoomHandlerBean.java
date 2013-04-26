@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package session;
 
 import java.util.List;
@@ -13,24 +9,20 @@ import misc.PlayerState;
 import persistence.Defi;
 import persistence.Player;
 
-/**
- *
- * @author Alex
- */
 @Stateless
 public class RoomHandlerBean implements RoomHandler {
 
     @PersistenceContext(unitName="GamePersistence")
     private EntityManager em;
-    
+
     public RoomHandlerBean() {}
 
     @Override
     public long defier(String a, String b) {
         Player p1 = em.find(Player.class, a);
         Player p2 = em.find(Player.class, b);
-        
-        if (p2 != null && p1 != null) {
+
+       if (p2 != null && p1 != null) {
             Defi d = new Defi(p1, p2);
             em.persist(d);
             return d.getId();
@@ -38,7 +30,7 @@ public class RoomHandlerBean implements RoomHandler {
             return 0;
         }
     }
-    
+
     @Override
     public void accepterDefi(long id) {
          Defi d = getDefi(id);
@@ -62,5 +54,12 @@ public class RoomHandlerBean implements RoomHandler {
     public Defi getDefi(long id) {
         Query query = em.createNamedQuery("getDefi").setParameter("id", id);
         return (Defi) query.getSingleResult();
+    }
+    
+    @Override
+    public void removeDefi(Defi d) {
+        em.clear();
+        Defi defiToRemove = em.find(Defi.class, d.getId());
+        em.remove(defiToRemove);
     }
 }
