@@ -84,7 +84,7 @@
     </head>
     <body>
         <h1>ROOM!</h1>
-        <h2>Bienvenue <%= USER_NICK %>!</h2>
+        <h2>Bienvenue <%= USER_NICK %>! Tessssttt !! </h2>
         
         <table>
             <caption>Vos défis</caption>
