@@ -3,7 +3,6 @@ package session;
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import misc.PlayerState;
 import persistence.Player;
 
 @Stateful
@@ -40,60 +39,62 @@ public class GameHandlerBean implements GameHandler {
     
      @Override
    public void setChoix(String c, String p) {
-         if(p.equals(player1))
-            choise1 = c;
-         else if (p.equals(player2))
-            choise2 = c;
+        if(p.equals(player1)) {
+            this.choise1 = c;
+        }
+        else if (p.equals(player2)) {
+            this.choise2 = c;
+        }
    }
      
     @Override
    public String getChoix(String p) {
-         if(p.equals(player1))
-            return choise1;
-         else if (p.equals(player2))
-            return choise2; 
+         if(p.equals(player1)) {
+             return this.choise1;
+         }
+         else if (p.equals(player2)) {
+             return this.choise2; 
+         }   
          return "";
    }
     
      @Override
    public int getScore(String p) {
-         if(p.equals(player1))
-            return score1;
-         else if (p.equals(player2))
-            return score2; 
+         if(p.equals(player1)) {
+             return this.score1;
+         }
+         else if (p.equals(player2)) {
+             return this.score2; 
+         }   
          return -1;
    }
    
     @Override
    public void play() {
-        if(choise1.equals("") || choise2.equals(""))
-            return;
-        else {
-            nbGame++;
-            if(!choise1.equals(choise2)){
-                if (choise1.equals("pierre")) {
-                    if(choise2.equals("ciseaux")) {
-                        score1++;
-                    } else {
-                        score2++;
-                    }
-                } else if (choise1.equals("ciseaux")) {
-                    if(choise2.equals("feuille")) {
-                        score1++;
-                    } else {
-                        score2++;
-                    }
-                } else if (choise1.equals("feuille")) {
-                    if(choise2.equals("pierre")) {
-                        score1++;
-                    } else {
-                        score2++;
-                    }
+        nbGame++;
+        if(!choise1.equals(choise2)){
+            if (choise1.equals("pierre")) {
+                if(choise2.equals("ciseaux")) {
+                    score1++;
+                } else {
+                    score2++;
+                }
+            } else if (choise1.equals("ciseaux")) {
+                if(choise2.equals("feuille")) {
+                    score1++;
+                } else {
+                    score2++;
+                }
+            } else if (choise1.equals("feuille")) {
+                if(choise2.equals("pierre")) {
+                    score1++;
+                } else {
+                    score2++;
                 }
             }
-            choise1 = "";
-            choise2 = "";
         }
+        choise1 = "";
+        choise2 = "";
     }
     
     @Override
@@ -109,19 +110,18 @@ public class GameHandlerBean implements GameHandler {
        } 
    }
     
-   @Override
-   public void end(String nick){
-         if(end == false){
-            end = true;
-            Player p = em.find(Player.class, nick);
-            p.setScore();
-            em.merge(p);
-         }
-   }
+    @Override
+    public void end(String nick){
+        if(end == false){
+           end = true;
+           Player p = em.find(Player.class, nick);
+           p.setScore();
+           em.merge(p);
+        }
+    }
      
    @Override
    public int getTour(){
        return nbGame;
    }
-    
 }

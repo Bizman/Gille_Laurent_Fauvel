@@ -33,7 +33,8 @@
     
     if( user.equals(Player1))
         opponent = Player2;
-       else opponent = Player1;
+    else 
+        opponent = Player1;
 %>
 
 <!DOCTYPE html>
@@ -53,23 +54,24 @@
             gamehandler.setPlayers(Player1, Player2);
             String choix = "";
             String computerChoise = "";
-            if (opponent.equals("computer")) {
-                int choise = (int) Math.round(Math.random()*2);      
-                if (choise == 0) {
-                    computerChoise = "pierre";
-                } else if (choise == 1) {
-                    computerChoise = "feuille";
-                } else if (choise == 2) {
-                    computerChoise = "ciseaux";
-                }
-                gamehandler.setChoix(computerChoise, "computer");
-            } 
+            
             choix = (String) request.getParameter("req-type");
             if (choix != null) {
                 if (choix.equals("backToRoom")) {
                     response.sendRedirect("room.jsp");
                     roomHandler.removeDefi(d);
                 } else {
+                    if (opponent.equals("computer")) {
+                        int choise = (int) Math.round(Math.random()*2);      
+                        if (choise == 0) {
+                            computerChoise = "pierre";
+                        } else if (choise == 1) {
+                            computerChoise = "feuille";
+                        } else if (choise == 2) {
+                            computerChoise = "ciseaux";
+                        }
+                        gamehandler.setChoix(computerChoise, "computer");
+                    } 
                     gamehandler.setChoix(choix, user);
                 }
             }
