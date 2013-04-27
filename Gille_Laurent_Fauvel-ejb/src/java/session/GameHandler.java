@@ -29,4 +29,6 @@ public interface GameHandler {
    public int checkScore();
 
    public void end(String nick);
+
+   public void reinitialisation();
 }

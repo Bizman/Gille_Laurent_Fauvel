@@ -114,13 +114,17 @@
                 <th>Etat</th>
                 <th>Actions</th>
             </tr>
-        <% for (Player p : connectedPlayersList){ %>
-            <tr>
-                <td><%= p.getNickName() %></td>
-                <td><%= p.getEtat() %></td>
-                <td><a href="room.jsp?action=defier&opponent=<%= p.getNickName() %>">Défier</a></td>
-            </tr>
         <% 
+            for (Player p : connectedPlayersList){ 
+                if(!p.getNickName().equals("computer")) {
+        %>
+                <tr>
+                    <td><%= p.getNickName() %></td>
+                    <td><%= p.getEtat() %></td>
+                    <td><a href="room.jsp?action=defier&opponent=<%= p.getNickName() %>">Défier</a></td>
+                </tr>
+        <% 
+                }
             }
         %>
         </table>

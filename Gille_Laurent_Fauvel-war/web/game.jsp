@@ -60,6 +60,7 @@
                 if (choix.equals("backToRoom")) {
                     response.sendRedirect("room.jsp");
                     roomHandler.removeDefi(d);
+                    gamehandler.reinitialisation();
                 } else {
                     if (opponent.equals("computer")) {
                         int choise = (int) Math.round(Math.random()*2);      

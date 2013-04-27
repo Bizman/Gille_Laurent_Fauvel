@@ -71,25 +71,29 @@ public class GameHandlerBean implements GameHandler {
    
     @Override
    public void play() {
-        nbGame++;
-        if(!choise1.equals(choise2)){
-            if (choise1.equals("pierre")) {
-                if(choise2.equals("ciseaux")) {
-                    score1++;
-                } else {
-                    score2++;
-                }
-            } else if (choise1.equals("ciseaux")) {
-                if(choise2.equals("feuille")) {
-                    score1++;
-                } else {
-                    score2++;
-                }
-            } else if (choise1.equals("feuille")) {
-                if(choise2.equals("pierre")) {
-                    score1++;
-                } else {
-                    score2++;
+        if(choise1.equals("") || choise2.equals("")) {
+            return;
+        } else {
+            nbGame++;
+            if(!choise1.equals(choise2)){
+                if (choise1.equals("pierre")) {
+                    if(choise2.equals("ciseaux")) {
+                        score1++;
+                    } else {
+                        score2++;
+                    }
+                } else if (choise1.equals("ciseaux")) {
+                    if(choise2.equals("feuille")) {
+                        score1++;
+                    } else {
+                        score2++;
+                    }
+                } else if (choise1.equals("feuille")) {
+                    if(choise2.equals("pierre")) {
+                        score1++;
+                    } else {
+                        score2++;
+                    }
                 }
             }
         }
@@ -114,12 +118,26 @@ public class GameHandlerBean implements GameHandler {
     public void end(String nick){
         if(end == false){
            end = true;
-           Player p = em.find(Player.class, nick);
-           p.setScore();
-           em.merge(p);
+           if(!nick.equals("computer")) {
+                Player p = em.find(Player.class, nick);
+                p.setScore();
+                em.merge(p);
+           }
         }
     }
-     
+    
+    @Override
+    public void reinitialisation() {
+        this.player1 = "player1";
+        this.player2 = "player2";
+        this.choise1 = "";
+        this.choise2 = "";
+        this.nbGame = 0;
+        this.score1 = 0;
+        this.score2 = 0;
+        this.end = false;
+    }
+    
    @Override
    public int getTour(){
        return nbGame;
