@@ -45,12 +45,10 @@
     </head>
     <body>
         <%
-            out.println("Vous: " + user + " Score :" + gamehandler.getScore(user));
+            out.println(user + " " + gamehandler.getScore(user) + " : " + gamehandler.getScore(opponent) + " "+ opponent);
         %>
         <p></p>
-        <%
-            out.println("Votre adversaire: " + opponent + " Score :" + gamehandler.getScore(opponent));
-   
+        <%   
             gamehandler.setPlayers(Player1, Player2);
             String choix = "";
             String computerChoise = "";
@@ -71,7 +69,7 @@
                         } else if (choise == 2) {
                             computerChoise = "ciseaux";
                         }
-                        gamehandler.setChoix(computerChoise, "computer");
+                        gamehandler.setChoix(computerChoise,  "computer");
                     } 
                     gamehandler.setChoix(choix, user);
                 }
@@ -112,7 +110,7 @@
         %>
         <h1> Partie terminée </h1>
         <p></p>
-        <%       
+        <%
              if(gamehandler.checkScore()==1){
                  if(user.equals(Player1)){
                      gamehandler.end(user);
@@ -120,12 +118,12 @@
         <h2> Vous avez gagné ! </h2>
         <p></p>
         <%       
-                        } else {  
-                            gamehandler.end(opponent);                     
+                        } 
+            } else {  
+                gamehandler.end(opponent);            
         %>
         <h2> Vous avez perdu ! </h2>
         <%       
-                        }
                 }
            }
         %>
