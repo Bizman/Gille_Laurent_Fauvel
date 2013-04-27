@@ -24,7 +24,9 @@
 <%
     String id = (String) request.getParameter("id");
     Defi d = roomHandler.getDefi(Long.parseLong(id));
-  
+    if(d == null ) {
+        response.sendRedirect("room.jsp");
+    }
     String Player1 = d.getFirstPlayer().getNickName();
     String Player2 = d.getSecondPlayer().getNickName();
     
@@ -85,7 +87,7 @@
         %>
         <p></p>
         <%
-            out.println("Son choix : " + gamehandler.getChoix(opponent));
+            out.println("Son choix : " + gamehandler.getOpponentChoix(user));
         %>
         <p></p>
          <%

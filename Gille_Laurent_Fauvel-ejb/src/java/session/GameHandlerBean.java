@@ -55,13 +55,20 @@ public class GameHandlerBean implements GameHandler {
    public String getChoix(String p) {
          if(p.equals(player1)) {
              return this.choise1;
-         }
-         else if (p.equals(player2) && !this.choise1.equals("")) {
+         } else if (p.equals(player2)) {
              return this.choise2; 
          }   
          return "";
    }
-    
+    @Override
+    public String getOpponentChoix(String p) {
+        if(p.equals(player1) && !choise1.equals("")) {
+            return choise2;
+        } else if(p.equals(player2) && !choise2.equals("")) {
+            return choise1;
+        }
+        return "";
+    }
     @Override
    public String getOldChoix(String p) {
          if(p.equals(player1)) {

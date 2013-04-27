@@ -21,6 +21,8 @@ public interface GameHandler {
    public String getOldChoix(String p);
    
    public String getChoix(String p);
+   
+   public String getOpponentChoix(String p);
     
    public int getScore(String p);
    
