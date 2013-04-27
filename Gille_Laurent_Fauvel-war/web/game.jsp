@@ -45,7 +45,11 @@
     </head>
     <body>
         <%
-            out.println(user + " " + gamehandler.getScore(user) + " : " + gamehandler.getScore(opponent) + " "+ opponent);
+            out.println("Scores => " + user + " " + gamehandler.getScore(user) + " : " + gamehandler.getScore(opponent) + " "+ opponent);
+        %>
+        <br />
+        <%
+            out.println("Dernier Choix => " + gamehandler.getOldChoix(user) + " : " + gamehandler.getOldChoix(opponent));
         %>
         <p></p>
         <%   

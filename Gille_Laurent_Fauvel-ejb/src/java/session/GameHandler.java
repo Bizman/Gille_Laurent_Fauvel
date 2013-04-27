@@ -18,6 +18,8 @@ public interface GameHandler {
     
    public void setChoix(String c, String p);
      
+   public String getOldChoix(String p);
+   
    public String getChoix(String p);
     
    public int getScore(String p);

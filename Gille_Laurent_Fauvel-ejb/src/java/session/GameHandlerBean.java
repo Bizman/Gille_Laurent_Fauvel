@@ -16,6 +16,8 @@ public class GameHandlerBean implements GameHandler {
    private String player2;
    private String choise1;
    private String choise2;
+   private String oldChoise1;
+   private String oldChoise2;
    private int score1;
    private int score2;
    private Boolean end;
@@ -25,6 +27,8 @@ public class GameHandlerBean implements GameHandler {
         this.player2 = "player2";
         this.choise1 = "";
         this.choise2 = "";
+        this.oldChoise1 = "";
+        this.oldChoise2 = "";
         this.nbGame = 0;
         this.score1 = 0;
         this.score2 = 0;
@@ -52,8 +56,19 @@ public class GameHandlerBean implements GameHandler {
          if(p.equals(player1)) {
              return this.choise1;
          }
-         else if (p.equals(player2)) {
+         else if (p.equals(player2) && !this.choise1.equals("")) {
              return this.choise2; 
+         }   
+         return "";
+   }
+    
+    @Override
+   public String getOldChoix(String p) {
+         if(p.equals(player1)) {
+             return this.oldChoise1;
+         }
+         else if (p.equals(player2)) {
+             return this.oldChoise2; 
          }   
          return "";
    }
@@ -96,6 +111,8 @@ public class GameHandlerBean implements GameHandler {
                     }
                 }
             }
+            this.oldChoise1 = this.choise1;
+            this.oldChoise2 = this.choise2;
         }
         choise1 = "";
         choise2 = "";
