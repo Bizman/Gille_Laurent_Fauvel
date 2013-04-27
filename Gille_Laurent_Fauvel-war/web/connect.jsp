@@ -15,10 +15,11 @@
 
 <%
     int retourConnexion;
+    int compteur = 5;
     String USER_NICK = (String) request.getParameter("USER_NICK");
     String pwd = (String) request.getParameter("pwd");
     
-    // Si l'utilisateur est déjà connecté
+    // Si l'autentification réussit 
     if (session.getAttribute("USER_NICK") != null) {
         response.sendRedirect("room.jsp");
     }
