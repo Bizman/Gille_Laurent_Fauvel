@@ -7,13 +7,22 @@ body {
 }
 
 table {
-    width: 200px;
     border-collapse: collapse;
+    width: 100%;
 }
 
-td {
-    border: 1px black solid;
+th, td {
+    text-align: left;
+}
+
+.table-wrap {
+    background: #efefef;
+    border: 1px gray groove;
+    width: 400px;
+    border-radius: 5px;
     padding: 7px;
+    display: inline-block;
+    vertical-align: top;
 }
 
 caption {
@@ -21,13 +30,35 @@ caption {
     size: 13px;
 }
 
-#body-wrap {
+.line {
+    line-height: 0;
+    border-top: 1px gray solid;
+    border-bottom: 1px #efefef solid;
+}
+
+.info-box {
+    border: 1px gold solid;
+    background: #ffffcc;
+}
+
+#header-line {
+    width: 1024px;
+    margin: 0 auto;
+}
+
+.centered-content {
     text-align: center;
+}
+
+#body-wrap {
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 1024px;
 }
 
 #header {
     margin: 38px auto;
-    margin-bottom: 60px;
+    margin-bottom: 20px;
     width: 600px;
 }
 
@@ -51,7 +82,7 @@ h2 {
 
 /*** index.jsp ***/
 .form-box {
-    margin: 0 45px;
+    margin: 0 25px;
     display: inline-block;
     vertical-align: top;
     width: 300px;
@@ -61,7 +92,7 @@ h2 {
     border-radius: 5px;
 }
 
-.form-box h2 {
+h2 {
     margin: 8px 0;
     text-align: center;
     color: #666;

@@ -5,6 +5,7 @@
 package session;
 
 import javax.ejb.Remote;
+import persistence.Player;
 
 /**
  *
@@ -24,4 +25,5 @@ public interface ConnectivityHandler {
     public int connect(String nick, String password);
     public boolean userExists(String nick);
     public void disconnect(String nick);
+    public Player getPlayer(String nick);
 }

@@ -53,7 +53,11 @@ public class RoomHandlerBean implements RoomHandler {
     @Override
     public Defi getDefi(long id) {
         Query query = em.createNamedQuery("getDefi").setParameter("id", id);
-        return (Defi) query.getSingleResult();
+        try {
+            return (Defi) query.getSingleResult();
+        } catch(Exception e) {
+            return null;
+        }
     }
     
     @Override

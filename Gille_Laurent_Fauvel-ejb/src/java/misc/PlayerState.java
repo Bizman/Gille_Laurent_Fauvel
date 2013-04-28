@@ -9,7 +9,12 @@ package misc;
  * @author Alex
  */
 public enum PlayerState {
-    CONNECTED,
-    PLAYING,
-    DISCONNECTED
+    CONNECTED("Connecté"),
+    PLAYING("Occupé"),
+    DISCONNECTED("Déconnecté");
+    
+    public String text;
+    PlayerState(String str) {
+        text = str;
+    } 
 };

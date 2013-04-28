@@ -36,17 +36,17 @@ public class ConnectivityHandlerBean implements ConnectivityHandler {
 
     @Override
     public int connect(String nick, String password) {
-        Player player = (Player) em.createNamedQuery("verifyUserData").setParameter("nickName", nick).setParameter("password", password).getSingleResult();
-        
-        if (player != null) {
+        try {
+            Player player = (Player) em.createNamedQuery("verifyUserData").setParameter("nickName", nick).setParameter("password", password).getSingleResult();
+
             if (player.getEtat() == PlayerState.DISCONNECTED) {
                 player.setState(PlayerState.CONNECTED);
                 return ConnectivityHandler.CONNECTION_OK;
             } else {
                 return ConnectivityHandlerBean.ALREADY_CONNECTED;
             }
-        } else {
-            return ConnectivityHandlerBean.BAD_INFO;
+        } catch(Exception e) {
+            return ConnectivityHandler.BAD_INFO;
         }
     }
 
@@ -58,5 +58,10 @@ public class ConnectivityHandlerBean implements ConnectivityHandler {
     @Override
     public void disconnect(String nick) {
         em.find(Player.class, nick).setState(PlayerState.DISCONNECTED);
-    }    
+    }
+    
+    @Override
+    public Player getPlayer(String nick) {
+        return em.find(Player.class, nick);
+    }
 }

@@ -22,17 +22,25 @@
 %>
 
 <%
-    String id = (String) request.getParameter("id");
-    Defi d = roomHandler.getDefi(Long.parseLong(id));
-    if(d == null ) {
+    String Player1 = null;
+    String Player2 = null;
+    Defi d = null;
+    String id = null;
+    String user = null;
+    
+    try {
+        id = (String) request.getParameter("id");
+        d = roomHandler.getDefi(Long.parseLong(id));
+        Player1 = d.getFirstPlayer().getNickName();
+        Player2 = d.getSecondPlayer().getNickName();
+        user = (String) session.getAttribute("USER_NICK");
+    } catch(Exception e) {
         response.sendRedirect("room.jsp");
+        return;
     }
-    String Player1 = d.getFirstPlayer().getNickName();
-    String Player2 = d.getSecondPlayer().getNickName();
     
-    String user = (String) session.getAttribute("USER_NICK");
-    String opponent;
-    
+    // Si la récupération des info aurpsè des beans s'est bien passée
+    String opponent;    
     if( user.equals(Player1))
         opponent = Player2;
     else 
@@ -44,8 +52,15 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>O. Fauvel - A. Gille - A. Laurent - SI4 2013</title>
+        <link rel="stylesheet" href="css/style.css" type="text/css" />
     </head>
     <body>
+        <div id="header">
+            <h1>Pierre # Feuille # Ciseaux</h1>
+            <p> > O. Fauvel-Jaeger, A. Gille, A. Laurent</p>
+        </div>
+        <p id="header-line" class="line"></p>
+        <div id="body-wrap">
         <%
             out.println("Scores => " + user + " " + gamehandler.getScore(user) + " : " + gamehandler.getScore(opponent) + " "+ opponent);
         %>
@@ -98,7 +113,6 @@
             if(gamehandler.checkScore()==0){
                 gamehandler.play();
         %>
-        <h1>Salle de Jeu !</h1>
         <form method="POST">
             <input type="hidden" name="req-type" value="pierre" />
             <p><input type="submit" name="pierre" value="pierre" /></p>
@@ -137,5 +151,6 @@
             <input type="hidden" name="req-type" value="backToRoom" />
             <p><input type="submit" name="backToRoom" value="Return to the room" /></p>
         </form>
+        </div>
     </body>
 </html>
