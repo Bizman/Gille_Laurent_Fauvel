@@ -76,7 +76,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>O. Fauvel - A. Gille - A. Laurent - SI4 2013</title>
         <link rel="stylesheet" href="css/style.css" type="text/css" />
-        <!--<script>window.setTimeout("location = 'room.jsp';", 3000);</script>-->
+        <script>window.setTimeout("location = 'room.jsp';", 5000);</script>
     </head>
     <body>
         <div id="header">
@@ -85,7 +85,7 @@
         </div>
         <p id="header-line" class="line"></p>
         <div id="body-wrap">
-            <p><image src="user-icon.png" style="margin-right: 3px;" /><strong><%= USER_NICK %></strong>, <%= user_points %> points. <a href="logout.jsp">Déconnecter</a></p>
+            <p><image src="images/user-icon.png" style="margin-right: 4px;" /><strong><%= USER_NICK %></strong>, <%= user_points %> parties gagnées. <a href="logout.jsp">Déconnecter</a></p>
             <div class="centered-content">
                 <div class="table-wrap">
                     <table>

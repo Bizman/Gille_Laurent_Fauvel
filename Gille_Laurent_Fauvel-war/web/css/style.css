@@ -2,8 +2,13 @@
     font-family: Calibri;
 }
 
+a, a:visited {
+    color: #01A9DB;
+}
+
 body {
     background: gainsboro;
+    background-image: url('../images/cardboard_flat.png');
 }
 
 table {
