@@ -1,19 +1,22 @@
 package session;
 
-import java.util.List;
-import javax.ejb.EJB;
+import java.util.Date;
+import java.util.HashMap;
 import javax.ejb.Stateful;
 import javax.persistence.*;
 import misc.PlayerState;
 import persistence.Player;
 
-@Stateful
+@Stateful(mappedName = "ejb/ConnectivityHandler")
 public class ConnectivityHandlerBean implements ConnectivityHandler {
     
     @PersistenceContext(unitName="GamePersistence")
     private EntityManager em;
+    private HashMap<String, Date> timestamps;
     
-    public ConnectivityHandlerBean() {}
+    public ConnectivityHandlerBean() {
+        timestamps = new HashMap<String, Date>();
+    }
     
     @Override
     public int subscribe(String nick, String firstName, String lastName, String password, String email) {
@@ -49,7 +52,27 @@ public class ConnectivityHandlerBean implements ConnectivityHandler {
             return ConnectivityHandler.BAD_INFO;
         }
     }
+    
+    @Override
+    public Date getTimestamp(String nick) {
+        try {
+            return timestamps.get(nick);
+        } catch(Exception e) {
+            return null;
+        }
+    }
 
+    @Override
+    public void clockIn(String nick) {
+        if (userExists(nick)) {
+            if (!timestamps.containsKey(nick)) {
+                timestamps.put(nick, new Date(System.currentTimeMillis()));
+            } else {
+                timestamps.get(nick).setTime(System.currentTimeMillis());
+            }
+        }
+    }
+    
     @Override
     public boolean userExists(String nick) {   
         return em.find(Player.class, nick) != null;

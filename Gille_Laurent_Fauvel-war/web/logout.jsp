@@ -7,7 +7,7 @@
     
     public void jspInit() {
         try {
-            connectivityHandler = (ConnectivityHandler) (new InitialContext()).lookup(ConnectivityHandler.class.getName());
+            connectivityHandler = (ConnectivityHandler) (new InitialContext()).lookup("ejb/ConnectivityHandler");
         } catch (Exception e) {
             System.out.println("disconnect.jsp init exception: " + e.getMessage());
         }

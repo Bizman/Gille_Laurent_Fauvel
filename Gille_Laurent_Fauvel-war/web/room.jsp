@@ -18,7 +18,7 @@
     public void jspInit() {
         try {
             roomHandler = (RoomHandler) (new InitialContext()).lookup(RoomHandler.class.getName());
-            connectivityHandler = (ConnectivityHandler) (new InitialContext()).lookup(ConnectivityHandler.class.getName());
+            connectivityHandler = (ConnectivityHandler) (new InitialContext()).lookup("ejb/ConnectivityHandler");
         } catch (Exception e) {
             System.out.println("room.jsp init exception: " + e.getMessage());
         }

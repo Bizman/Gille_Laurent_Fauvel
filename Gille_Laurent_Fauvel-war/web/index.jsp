@@ -6,11 +6,20 @@
     
     public void jspInit() {
         try {
-            connectHandler = (ConnectivityHandler) (new InitialContext()).lookup(ConnectivityHandler.class.getName());
+            connectHandler = (ConnectivityHandler) (new InitialContext()).lookup("ejb/ConnectivityHandler");
         } catch (Exception ex) {
             System.err.println("index.jsp: Exception: " + ex.getMessage());
+            return;
         }
     }
+%>
+<%
+    String prenom = (String) request.getParameter("prenom");
+    String nom = (String) request.getParameter("nom");
+    String email = (String) request.getParameter("email");
+    String pwd = (String) request.getParameter("pwd");
+    String USER_NICK = (String) request.getParameter("USER_NICK");
+    String type = (String) request.getParameter("req-type");
 %>
 <!DOCTYPE html>
 <html>
@@ -27,14 +36,7 @@
         <p id="header-line" class="line"></p>
         <div id="body-wrap" class="centered-content">
             <div class="form-box">
-        <%
-            String prenom = (String) request.getParameter("prenom");
-            String nom = (String) request.getParameter("nom");
-            String email = (String) request.getParameter("email");
-            String pwd = (String) request.getParameter("pwd");
-            String USER_NICK = (String) request.getParameter("USER_NICK");
-            String type = (String) request.getParameter("req-type");
-            
+        <%           
             if ("subscribe".equals(type)) {
                 if (prenom != null &&  nom != null && email != null &&  pwd != null &&  USER_NICK != null) {
 

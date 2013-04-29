@@ -4,6 +4,7 @@
  */
 package session;
 
+import java.util.Date;
 import javax.ejb.Remote;
 import persistence.Player;
 
@@ -26,4 +27,6 @@ public interface ConnectivityHandler {
     public boolean userExists(String nick);
     public void disconnect(String nick);
     public Player getPlayer(String nick);
+    public void clockIn(String nick);
+    public Date getTimestamp(String nick);
 }
