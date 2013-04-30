@@ -126,23 +126,27 @@
             <p><input type="submit" name="ciseaux" value="ciseaux" /></p>
         </form>
         <%
-            } else {
-        %>
+            } else {       
+         %>
         <h1> Partie terminée </h1>
         <p></p>
         <%
-             if(gamehandler.checkScore()==1){
-                 if(user.equals(Player1)){
+                 if(user.equals(Player1) && gamehandler.checkScore() == 1){
+                     gamehandler.end(user);
+        %>
+        <h2> Vous avez gagné ! </h2>
+        <p></p>
+        <%
+                } else if(user.equals(Player2) && gamehandler.checkScore() == 2){
                      gamehandler.end(user);
         %>
         <h2> Vous avez gagné ! </h2>
         <p></p>
         <%       
-                        } 
             } else {  
-                gamehandler.end(opponent);            
         %>
         <h2> Vous avez perdu ! </h2>
+        <p></p>
         <%       
                 }
            }
