@@ -5,6 +5,7 @@
 package session;
 
 import java.util.Date;
+import java.util.HashMap;
 import javax.ejb.Remote;
 import persistence.Player;
 

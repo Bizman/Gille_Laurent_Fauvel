@@ -58,10 +58,11 @@ public class ConnectivityHandlerBean implements ConnectivityHandler {
         try {
             return timestamps.get(nick);
         } catch(Exception e) {
-            return null;
+            e.printStackTrace();
         }
+        return null;
     }
-
+    
     @Override
     public void clockIn(String nick) {
         if (userExists(nick)) {
@@ -72,7 +73,7 @@ public class ConnectivityHandlerBean implements ConnectivityHandler {
             }
         }
     }
-    
+        
     @Override
     public boolean userExists(String nick) {   
         return em.find(Player.class, nick) != null;

@@ -1,11 +1,10 @@
 <%@page import="java.util.List"%>
 <%@page import="persistence.Defi"%>
-<%@page import="session.RoomHandler"%>
+<%@page import="session.*"%>
 <%@page import="jeu.Room"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Set"%>
 <%@page import="java.util.Iterator"%>
-<%@page import="session.ConnectivityHandler"%>
 <%@page import="javax.sound.midi.SysexMessage"%>
 <%@page import="javax.naming.InitialContext"%>
 <%@page import="persistence.Player"%>
@@ -14,11 +13,14 @@
 <%!
     private RoomHandler roomHandler;
     private ConnectivityHandler connectivityHandler;
+    private TimerSession timerSession;
     
     public void jspInit() {
         try {
             roomHandler = (RoomHandler) (new InitialContext()).lookup(RoomHandler.class.getName());
             connectivityHandler = (ConnectivityHandler) (new InitialContext()).lookup("ejb/ConnectivityHandler");
+            timerSession = (TimerSession) (new InitialContext()).lookup("ejb/TimerSession");
+            
         } catch (Exception e) {
             System.out.println("room.jsp init exception: " + e.getMessage());
         }
@@ -43,6 +45,12 @@
 %>
 
 <%
+    out.println(timerSession.clockIn(USER_NICK));
+    out.println(timerSession.getTimestamp(USER_NICK));
+    if(timerSession.endOfTime(USER_NICK)) {
+        response.sendRedirect("logout.jsp");
+    }
+
     String action = (String) request.getParameter("action");
     
     if (action != null) {
@@ -59,7 +67,6 @@
             String did = (String) request.getParameter("did");
             
             if (did != null && !did.isEmpty()) {
-                //out.write(USER_NICK + " accepte le défi " + did);
                 Defi d = roomHandler.getDefi(Long.parseLong(did));
                 out.write(" id   " + did + "    " + d.getId() + "   " + d.getEtat());
                 roomHandler.accepterDefi(Long.parseLong(did));
