@@ -1,4 +1,4 @@
-<%@page import="session.ConnectivityHandler"%>
+<%@page import="session.*"%>
 <%@page import="javax.naming.InitialContext"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%!

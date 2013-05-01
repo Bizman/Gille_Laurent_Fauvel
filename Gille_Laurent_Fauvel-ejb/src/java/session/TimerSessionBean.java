@@ -48,6 +48,15 @@ public class TimerSessionBean implements TimerSession{
     }
         
     @Override
+    public void resetTime(String nick) {
+        if(userExists(nick)) {
+            if (timeOut.containsKey(nick)) {
+                timeOut.put(nick, 0);
+            }
+        }
+    }
+    
+    @Override
     public boolean endOfTime(String nick) {
         if(userExists(nick)) {
             if (timeOut.containsKey(nick)) {

@@ -39,7 +39,6 @@
         return;
     }
     
-    // Si la récupération des info aurpsè des beans s'est bien passée
     String opponent;    
     if( user.equals(Player1))
         opponent = Player2;

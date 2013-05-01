@@ -18,5 +18,5 @@ public interface TimerSession {
     public int getTimestamp(String nick);
     public int clockIn(String nick);
     public boolean endOfTime(String nick);
-
+    public void resetTime(String nick);
 }
