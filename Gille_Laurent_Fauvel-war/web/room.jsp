@@ -49,16 +49,6 @@
     //Fait une vérification de tout les personnes qui étaient connectés et vérifie le temps "d'inactivité"
     timerSession.endOfTime(connectivityHandler);
     
-    //Partie qui gère le bouton de deconnexion
-    String deconnect = "";
-    deconnect = (String) request.getParameter("req-type");
-    if (deconnect != null) {
-        if (deconnect.equals("deconnect")) {
-            timerSession.deconnect(USER_NICK);
-            response.sendRedirect("logout.jsp");
-        }
-    }
-    
     //Partie qui gère le choix de l'utilisateur
     String action = (String) request.getParameter("action");
     if (action != null) {
@@ -172,10 +162,7 @@
                     </table>
                 </div>
             </div>
-            <form method="POST">
-                <input type="hidden" name="req-type" value="deconnect" />
-                <p><input type="submit" name="deconnect" value="Déconnecter" /></p>
-            </form>
+            <p><input type="submit" onclick="top.location.href='logout.jsp';" value="Déconnecter" /></p>
         </div>
     </body>
 </html>

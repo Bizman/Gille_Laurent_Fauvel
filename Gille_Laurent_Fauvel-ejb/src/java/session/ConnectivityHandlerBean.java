@@ -1,7 +1,5 @@
 package session;
 
-import java.util.Date;
-import java.util.HashMap;
 import javax.ejb.Stateful;
 import javax.persistence.*;
 import misc.PlayerState;
@@ -12,11 +10,8 @@ public class ConnectivityHandlerBean implements ConnectivityHandler {
     
     @PersistenceContext(unitName="GamePersistence")
     private EntityManager em;
-    private HashMap<String, Date> timestamps;
     
-    public ConnectivityHandlerBean() {
-        timestamps = new HashMap<String, Date>();
-    }
+    public ConnectivityHandlerBean() {}
     
     @Override
     public int subscribe(String nick, String firstName, String lastName, String password, String email) {
@@ -50,27 +45,6 @@ public class ConnectivityHandlerBean implements ConnectivityHandler {
             }
         } catch(Exception e) {
             return ConnectivityHandler.BAD_INFO;
-        }
-    }
-    
-    @Override
-    public Date getTimestamp(String nick) {
-        try {
-            return timestamps.get(nick);
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-    
-    @Override
-    public void clockIn(String nick) {
-        if (userExists(nick)) {
-            if (!timestamps.containsKey(nick)) {
-                timestamps.put(nick, new Date(System.currentTimeMillis()));
-            } else {
-                timestamps.get(nick).setTime(System.currentTimeMillis());
-            }
         }
     }
         

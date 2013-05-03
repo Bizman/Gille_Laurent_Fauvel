@@ -1,14 +1,14 @@
 package session;
 
-import java.util.Iterator;
 import java.util.Date;
 import java.util.HashMap;
-import javax.ejb.Stateful;
+import java.util.Iterator;
+import javax.ejb.Singleton;
 import javax.persistence.*;
 import persistence.Player;
    
-@Stateful(mappedName = "ejb/TimerSession")
-public class TimerSessionBean implements TimerSession{
+@Singleton(mappedName = "ejb/TimerSession")
+public class TimerSessionBean implements TimerSession {
 
     @PersistenceContext(unitName="GamePersistence")
     private EntityManager em;    
@@ -29,9 +29,8 @@ public class TimerSessionBean implements TimerSession{
         try {
             return timeOut.get(nick);
         } catch(Exception e) {
-            e.printStackTrace();
+            return null;
         }
-        return null;
     }
      
     @Override
@@ -47,7 +46,7 @@ public class TimerSessionBean implements TimerSession{
     
     @Override
     public long getDiffDate(String nick) {
-        return (new Date(System.currentTimeMillis())).getTime() - timeOut.get(nick).getTime();
+        return (System.currentTimeMillis() - timeOut.get(nick).getTime());
     }
     
     @Override
@@ -59,10 +58,10 @@ public class TimerSessionBean implements TimerSession{
         }
     }
     
-    @Override
-    public String getList() {
-        return timeOut.toString();
-    }
+//    @Override
+//    public String getList() {
+//        return timeOut.toString();
+//    }
     
     @Override
     public void endOfTime(ConnectivityHandler connectivityHandler) {
