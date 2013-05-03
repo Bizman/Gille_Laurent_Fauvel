@@ -7,16 +7,20 @@ package session;
 import javax.ejb.Singleton;
 import javax.ejb.LocalBean;
 import javax.ejb.Remote;
+import java.util.Date;
 /**
  *
  * @author Olivier
  */
 @Remote
 public interface TimerSession {
-
+    
     public boolean userExists(String nick);
-    public int getTimestamp(String nick);
-    public int clockIn(String nick);
-    public boolean endOfTime(String nick);
-    public void resetTime(String nick);
+    public Date getTimestamp(String nick);
+    public void clockIn(String nick);
+    public long getDiffDate(String nick);
+    public void deconnect(String nick);
+    public String getList();
+    public void endOfTime(ConnectivityHandler connectivityHandler);   
+    
 }

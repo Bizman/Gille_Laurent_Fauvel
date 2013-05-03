@@ -44,22 +44,17 @@
 %>
 
 <%
-    //Affichage de test
-    out.println(timerSession.clockIn(USER_NICK));
-    out.println(timerSession.getTimestamp(USER_NICK));
-  
-     // On vérifie le temps de connexion de l'utilisateur
-    if(timerSession.endOfTime(USER_NICK)) {
-        timerSession.resetTime(USER_NICK);
-        response.sendRedirect("logout.jsp");
-    }
+    //Pour mettre a jour la date de l'utilisateur (prouve qu'il est actif)
+    timerSession.clockIn(USER_NICK);
+    //Fait une vérification de tout les personnes qui étaient connectés et vérifie le temps "d'inactivité"
+    timerSession.endOfTime(connectivityHandler);
     
     //Partie qui gère le bouton de deconnexion
     String deconnect = "";
     deconnect = (String) request.getParameter("req-type");
     if (deconnect != null) {
         if (deconnect.equals("deconnect")) {
-            timerSession.resetTime(USER_NICK);
+            timerSession.deconnect(USER_NICK);
             response.sendRedirect("logout.jsp");
         }
     }
@@ -72,10 +67,10 @@
             long id = 0;
             id = roomHandler.defier(USER_NICK, opponent);
             if (opponent != null && !opponent.isEmpty() && opponent.equals("computer")) {
-                timerSession.resetTime(USER_NICK);
+                timerSession.deconnect(USER_NICK);
                 response.sendRedirect("game.jsp?id="+id);
             } else if (opponent != null && !opponent.isEmpty()) {
-                timerSession.resetTime(USER_NICK);
+                timerSession.deconnect(USER_NICK);
                 response.sendRedirect("waiting.jsp?id="+id);
             }            
         } else if ("accepter-defi".equals(action)) {
@@ -87,7 +82,7 @@
                 roomHandler.accepterDefi(Long.parseLong(did));
                 out.write(" id   " + did + "    " + d.getId() + "   " + d.getEtat());
                 d = roomHandler.getDefi(Long.parseLong(did));
-                timerSession.resetTime(USER_NICK);
+                timerSession.deconnect(USER_NICK);
                 response.sendRedirect("game.jsp?id="+did);      
             }
         }

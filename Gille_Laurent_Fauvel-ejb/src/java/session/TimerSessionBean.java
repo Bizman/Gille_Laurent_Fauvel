@@ -1,5 +1,6 @@
 package session;
 
+import java.util.Iterator;
 import java.util.Date;
 import java.util.HashMap;
 import javax.ejb.Stateful;
@@ -10,11 +11,12 @@ import persistence.Player;
 public class TimerSessionBean implements TimerSession{
 
     @PersistenceContext(unitName="GamePersistence")
-    private EntityManager em;
-    private HashMap<String, Integer> timeOut;
+    private EntityManager em;    
+    private HashMap<String, Date> timeOut;
+    private static int timeToDeco = 30;
     
     public TimerSessionBean() {
-        timeOut = new HashMap<String, Integer>();
+        timeOut = new HashMap<String, Date>();
     }
     
    @Override
@@ -23,47 +25,54 @@ public class TimerSessionBean implements TimerSession{
     }
     
     @Override
-    public int getTimestamp(String nick) {
+    public Date getTimestamp(String nick) {
         try {
             return timeOut.get(nick);
         } catch(Exception e) {
             e.printStackTrace();
         }
-        return -1;
+        return null;
     }
-    
+     
     @Override
-    public int clockIn(String nick) {
+    public void clockIn(String nick) {
         if (userExists(nick)) {
             if (!timeOut.containsKey(nick)) {
-                timeOut.put(nick, 0);
-                return 1;
+                timeOut.put(nick, new Date(System.currentTimeMillis()));
             } else {
-                int time = timeOut.get(nick).intValue();
-                time++;
-                return timeOut.put(nick, time);
-            }
-        }
-        return 0;
-    }
-        
-    @Override
-    public void resetTime(String nick) {
-        if(userExists(nick)) {
-            if (timeOut.containsKey(nick)) {
-                timeOut.put(nick, 0);
+                timeOut.get(nick).setTime(System.currentTimeMillis());
             }
         }
     }
     
     @Override
-    public boolean endOfTime(String nick) {
+    public long getDiffDate(String nick) {
+        return (new Date(System.currentTimeMillis())).getTime() - timeOut.get(nick).getTime();
+    }
+    
+    @Override
+    public void deconnect(String nick) {
         if(userExists(nick)) {
             if (timeOut.containsKey(nick)) {
-                if(timeOut.get(nick).intValue() >= 5)
-                    return true;
-                }
-            }        
-        return false;
+                timeOut.remove(nick);
+            }
+        }
+    }
+    
+    @Override
+    public String getList() {
+        return timeOut.toString();
+    }
+    
+    @Override
+    public void endOfTime(ConnectivityHandler connectivityHandler) {
+        Iterator it = timeOut.keySet().iterator();
+        while(it.hasNext()) {
+            String nick = (String) it.next();
+            if(this.getDiffDate(nick) / 1000 >= timeToDeco) {
+                connectivityHandler.disconnect(nick);
+                timeOut.remove(nick);
+            }
+        }
     }
 }

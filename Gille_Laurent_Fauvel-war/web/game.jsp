@@ -40,10 +40,11 @@
     }
     
     String opponent;    
-    if( user.equals(Player1))
+    if( user.equals(Player1)) {
         opponent = Player2;
-    else 
+    } else {
         opponent = Player1;
+    } 
 %>
 
 <!DOCTYPE html>
