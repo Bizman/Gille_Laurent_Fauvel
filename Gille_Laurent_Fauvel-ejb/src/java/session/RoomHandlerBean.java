@@ -15,8 +15,6 @@ public class RoomHandlerBean implements RoomHandler {
     @PersistenceContext(unitName="GamePersistence")
     private EntityManager em;
 
-    public RoomHandlerBean() {}
-
     @Override
     public long defier(String a, String b) {
         Player p1 = em.find(Player.class, a);

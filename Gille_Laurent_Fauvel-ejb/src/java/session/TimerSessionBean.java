@@ -3,6 +3,7 @@ package session;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.persistence.*;
 import persistence.Player;
@@ -15,7 +16,8 @@ public class TimerSessionBean implements TimerSession {
     private HashMap<String, Date> timeOut;
     private static int timeToDeco = 30;
     
-    public TimerSessionBean() {
+    @PostConstruct
+    public void init() {
         timeOut = new HashMap<String, Date>();
     }
     

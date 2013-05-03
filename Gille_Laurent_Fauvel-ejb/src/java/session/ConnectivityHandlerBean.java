@@ -10,9 +10,7 @@ public class ConnectivityHandlerBean implements ConnectivityHandler {
     
     @PersistenceContext(unitName="GamePersistence")
     private EntityManager em;
-    
-    public ConnectivityHandlerBean() {}
-    
+        
     @Override
     public int subscribe(String nick, String firstName, String lastName, String password, String email) {
         Player p = new Player(firstName, lastName, nick, password, email, 0);

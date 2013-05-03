@@ -18,7 +18,6 @@ public interface TimerSession {
     public void clockIn(String nick);
     public long getDiffDate(String nick);
     public void deconnect(String nick);
-    //public String getList();
     public void endOfTime(ConnectivityHandler connectivityHandler);   
     
 }

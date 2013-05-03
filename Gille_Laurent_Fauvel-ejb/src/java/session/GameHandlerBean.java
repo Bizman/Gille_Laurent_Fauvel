@@ -1,5 +1,6 @@
 package session;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -21,8 +22,9 @@ public class GameHandlerBean implements GameHandler {
    private int score1;
    private int score2;
    private Boolean end;
-    
-   public GameHandlerBean() {
+   
+   @PostConstruct
+   public void initPlayer() {
         this.player1 = "player1";
         this.player2 = "player2";
         this.choise1 = "";
@@ -35,7 +37,7 @@ public class GameHandlerBean implements GameHandler {
         this.end = false;
    }
 
-    @Override
+   @Override
    public void setPlayers(String player1, String player2) {
         this.player1 = player1;
         this.player2 = player2;
