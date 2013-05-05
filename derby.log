@@ -1,11 +1,76 @@
-Fri Mar 22 10:40:38 CET 2013 : Apache Derby Serveur réseau - 10.8.1.2 - (1095077) démarré et prêt à accepter les connexions sur le port 1527
+Sun May 05 15:04:34 CEST 2013 : Apache Derby Serveur réseau - 10.8.1.2 - (1095077) démarré et prêt à accepter les connexions sur le port 1527
 ----------------------------------------------------------------
-Fri Mar 22 10:40:52 CET 2013:
-Amorçage de Derby version The Apache Software Foundation - Apache Derby - 10.8.1.2 - (1095077) : instance a816c00e-013d-9178-ace4-ffffcaa3bc96 
-dans le répertoire de base de données C:\Users\Alex\Documents\Serveur d'entreprise\TD\ejb\enterprise\Gille_Laurent_Fauvel\Gille_Laurent_Fauvel_DataBase  avec le chargeur de classe sun.misc.Launcher$AppClassLoader@3d637d45
+Sun May 05 15:04:58 CEST 2013:
+Amorçage de Derby version The Apache Software Foundation - Apache Derby - 10.8.1.2 - (1095077) : instance a816c00e-013e-74cb-34ac-000024c033cf 
+dans le répertoire de base de données C:\Users\Olivier\Documents\Gille_Laurent_Fauvel\Gille_Laurent_Fauvel\Gille_Laurent_Fauvel_DataBase  avec le chargeur de classe sun.misc.Launcher$AppClassLoader@69365360
 
 java.vendor=Oracle Corporation
-java.runtime.version=1.7.0_07-b11
+java.runtime.version=1.7.0_15-b03
 user.dir=C:\glassfish-3.1.2.2\javadb
-derby.system.home=C:\Users\Alex\Documents\Serveur d'entreprise\TD\ejb\enterprise\Gille_Laurent_Fauvel
+derby.system.home=C:\Users\Olivier\Documents\Gille_Laurent_Fauvel\Gille_Laurent_Fauvel
+Chargeur de classe de la base de données démarré - derby.database.classpath=''
+----------------------------------------------------------------
+Sun May 05 15:05:05 CEST 2013:
+Arrêt de l'instance a816c00e-013e-74cb-34ac-000024c033cf avec le chargeur de classe C:\Users\Olivier\Documents\Gille_Laurent_Fauvel\Gille_Laurent_Fauvel\Gille_Laurent_Fauvel_DataBase 
+Sun May 05 15:05:05 CEST 2013 Thread[DRDAConnThread_3,5,main] (DATABASE = Gille_Laurent_Fauvel_DataBase), (DRDAID = {2}), Arrêt de la base de données 'Gille_Laurent_Fauvel_DataBase'.
+Sun May 05 15:05:30 CEST 2013 Thread[DRDAConnThread_3,5,main] Cleanup action starting
+java.sql.SQLException: Impossible de trouver la base de données 'myDB'.
+	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.getSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.Util.newEmbedSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.Util.newEmbedSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedConnection.newSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedConnection.handleDBNotFound(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedConnection.<init>(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedConnection30.<init>(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedConnection40.<init>(Unknown Source)
+	at org.apache.derby.jdbc.Driver40.getNewEmbedConnection(Unknown Source)
+	at org.apache.derby.jdbc.InternalDriver.connect(Unknown Source)
+	at org.apache.derby.jdbc.AutoloadedDriver.connect(Unknown Source)
+	at org.apache.derby.impl.drda.Database.makeConnection(Unknown Source)
+	at org.apache.derby.impl.drda.DRDAConnThread.getConnFromDatabaseName(Unknown Source)
+	at org.apache.derby.impl.drda.DRDAConnThread.verifyUserIdPassword(Unknown Source)
+	at org.apache.derby.impl.drda.DRDAConnThread.parseSECCHK(Unknown Source)
+	at org.apache.derby.impl.drda.DRDAConnThread.parseDRDAConnection(Unknown Source)
+	at org.apache.derby.impl.drda.DRDAConnThread.processCommands(Unknown Source)
+	at org.apache.derby.impl.drda.DRDAConnThread.run(Unknown Source)
+Caused by: java.sql.SQLException: Impossible de trouver la base de données 'myDB'.
+	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.wrapArgsForTransportAcrossDRDA(Unknown Source)
+	... 19 more
+============= begin nested exception, level (1) ===========
+java.sql.SQLException: Impossible de trouver la base de données 'myDB'.
+	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.wrapArgsForTransportAcrossDRDA(Unknown Source)
+	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.getSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.Util.newEmbedSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.Util.newEmbedSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedConnection.newSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedConnection.handleDBNotFound(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedConnection.<init>(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedConnection30.<init>(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedConnection40.<init>(Unknown Source)
+	at org.apache.derby.jdbc.Driver40.getNewEmbedConnection(Unknown Source)
+	at org.apache.derby.jdbc.InternalDriver.connect(Unknown Source)
+	at org.apache.derby.jdbc.AutoloadedDriver.connect(Unknown Source)
+	at org.apache.derby.impl.drda.Database.makeConnection(Unknown Source)
+	at org.apache.derby.impl.drda.DRDAConnThread.getConnFromDatabaseName(Unknown Source)
+	at org.apache.derby.impl.drda.DRDAConnThread.verifyUserIdPassword(Unknown Source)
+	at org.apache.derby.impl.drda.DRDAConnThread.parseSECCHK(Unknown Source)
+	at org.apache.derby.impl.drda.DRDAConnThread.parseDRDAConnection(Unknown Source)
+	at org.apache.derby.impl.drda.DRDAConnThread.processCommands(Unknown Source)
+	at org.apache.derby.impl.drda.DRDAConnThread.run(Unknown Source)
+============= end nested exception, level (1) ===========
+Cleanup action completed
+Sun May 05 15:05:30 CEST 2013 Thread[DRDAConnThread_3,5,main] (DATABASE = myDB), (DRDAID = {3}), Impossible de trouver la base de données 'myDB'.
+----------------------------------------------------------------
+Sun May 05 15:05:33 CEST 2013:
+Amorçage de Derby version The Apache Software Foundation - Apache Derby - 10.8.1.2 - (1095077) : instance 6c44409f-013e-74cb-34ac-000024c033cf 
+dans le répertoire de base de données C:\Users\Olivier\Documents\Gille_Laurent_Fauvel\Gille_Laurent_Fauvel\Gille_Laurent_Fauvel_DataBase  avec le chargeur de classe sun.misc.Launcher$AppClassLoader@69365360
+
+java.vendor=Oracle Corporation
+java.runtime.version=1.7.0_15-b03
+user.dir=C:\glassfish-3.1.2.2\javadb
+derby.system.home=C:\Users\Olivier\Documents\Gille_Laurent_Fauvel\Gille_Laurent_Fauvel
 Chargeur de classe de la base de données démarré - derby.database.classpath=''
