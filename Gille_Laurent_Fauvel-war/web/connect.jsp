@@ -3,11 +3,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%!
     private ConnectivityHandler connectHandler = null;
+    private TimerSession timerSession = null;
     private int COUNTDOWN = 2; //timeout seconds
     
     public void jspInit() {
         try {
             connectHandler = (ConnectivityHandler) (new InitialContext()).lookup("ejb/ConnectivityHandler");
+            timerSession = (TimerSession) (new InitialContext()).lookup("ejb/TimerSession");
         } catch (Exception ex) {
             System.err.println("Exception: " + ex.getMessage());
         }
@@ -51,6 +53,8 @@
         <%
             if (retourConnexion == ConnectivityHandler.CONNECTION_OK) {
                session.setAttribute("USER_NICK", USER_NICK);
+               timerSession.setTimer(30000);
+               timerSession.setConnectHandler(connectHandler);
         %>
                <p>Bienvenue <strong><%= USER_NICK %></strong>!</p>
                <p>Vous allez être redirigé vers votre espace personnel dans <%= COUNTDOWN %> secondes.</p>  

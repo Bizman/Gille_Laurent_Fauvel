@@ -46,9 +46,12 @@
 <%
     //Pour mettre a jour la date de l'utilisateur (prouve qu'il est actif)
     timerSession.clockIn(USER_NICK);
-    //Fait une vérification de tout les personnes qui étaient connectés et vérifie le temps "d'inactivité"
-    timerSession.endOfTime(connectivityHandler);
-    
+
+    //Tests...
+    //out.println("Prog : " + timerSession.getLastProgrammaticTimeout().toString());
+    //out.println("Auto : " + timerSession.getLastAutomaticTimeout().toString());
+    //out.println(timerSession.getList());
+
     //Partie qui gère le choix de l'utilisateur
     String action = (String) request.getParameter("action");
     if (action != null) {

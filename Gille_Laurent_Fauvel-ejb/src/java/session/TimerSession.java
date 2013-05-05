@@ -1,23 +1,17 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package session;
 
 import javax.ejb.Remote;
 import java.util.Date;
-/**
- *
- * @author Olivier
- */
+import javax.ejb.Timer;
+
 @Remote
 public interface TimerSession {
     
-    public boolean userExists(String nick);
-    public Date getTimestamp(String nick);
+    public void setTimer(long intervalDuration);
+    public String getList();
+    public void setConnectHandler(ConnectivityHandler connectHandler);
     public void clockIn(String nick);
-    public long getDiffDate(String nick);
+    public Date getLastProgrammaticTimeout();    
     public void deconnect(String nick);
-    public void endOfTime(ConnectivityHandler connectivityHandler);   
     
 }
