@@ -1,4 +1,3 @@
-<% response.addHeader("Refresh","3"); %>
 <%@page import="java.util.List"%>
 <%@page import="persistence.Defi"%>
 <%@page import="misc.DefiState"%>
@@ -26,17 +25,26 @@
  %>
  
  <%
-    String id = null;
+    String id = (String) request.getParameter("id");
     Defi d = null;
+    String action = (String) request.getParameter("action");
     
     try {
-        id = (String) request.getParameter("id");
         d = roomHandler.getDefi(Long.parseLong(id));
     } catch (Exception e) {
         response.sendRedirect("room.jsp");
         return;
     }
 
+    // Actions
+    if (action != null && !action.isEmpty()) {
+        if ("annuler".equals(action)) {
+            roomHandler.removeDefi(d.getId());
+            response.sendRedirect("room.jsp");
+            return;
+        }
+    }
+    
     if (d == null) {
         response.sendRedirect("room.jsp");
         return;
@@ -53,7 +61,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>O. Fauvel - A. Gille - A. Laurent - SI4 2013</title>
         <link rel="stylesheet" href="css/style.css" type="text/css" />
-        <script>window.setTimeout("location = 'room.jsp?id="+id+"';", 10000);</script>
+        <script>window.setTimeout("location.reload(true)", 3000);</script>
     </head>
     <body>
         <div id="header">
@@ -63,6 +71,7 @@
         <p id="header-line" class="line"></p>
         <div id="body-wrap">
             <h2>Vous êtes en attente d'une réponse de votre adversaire</h2>
+            <p class="centered-content"><input type="button" onClick="javascript:top.location.href='?action=annuler&id=<%= d.getId() %>'" value="Annuler le défi" /></p>
         </div>
     </body>
 </html>

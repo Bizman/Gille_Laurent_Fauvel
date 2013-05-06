@@ -8,7 +8,6 @@ import javax.ejb.Timer;
 public interface TimerSession {
     
     public void setTimer(long intervalDuration);
-    public String getList();
     public void setConnectHandler(ConnectivityHandler connectHandler);
     public void clockIn(String nick);
     public Date getLastProgrammaticTimeout();    

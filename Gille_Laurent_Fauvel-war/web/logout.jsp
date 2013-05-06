@@ -38,7 +38,7 @@
         <div id="body-wrap">
             <h2>Vous êtes maintenant déconnecté.</h2>
             <h2>Au revoir.</h2>
-            <p style="color:gray;">Vous allez être redirigé vers la page d'<a href="index.jsp">accueil</a>.</p>
+            <p class="centered-content" style="color:gray;">Vous allez être redirigé vers la page d'<a href="index.jsp">accueil</a>.</p>
         </div>
     </body>
 </html>

@@ -32,18 +32,14 @@
     String USER_NICK = (String) session.getAttribute("USER_NICK");
     if(USER_NICK == null) {
         response.sendRedirect("index.jsp");
+        return;
     }
     
     int user_points = connectivityHandler.getPlayer(USER_NICK).getScore();
     
     // Récupération des joueur en ligne
     List<Player> connectedPlayersList = roomHandler.getPlayers(USER_NICK);
-    
-    // Récupération des défi
-    List<Defi> defiList = roomHandler.getDefis(USER_NICK);
-%>
 
-<%
     //Pour mettre a jour la date de l'utilisateur (prouve qu'il est actif)
     timerSession.clockIn(USER_NICK);
 
@@ -70,16 +66,21 @@
             String did = (String) request.getParameter("did");
             
             if (did != null && !did.isEmpty()) {
-                Defi d = roomHandler.getDefi(Long.parseLong(did));
-                out.write(" id   " + did + "    " + d.getId() + "   " + d.getEtat());
                 roomHandler.accepterDefi(Long.parseLong(did));
-                out.write(" id   " + did + "    " + d.getId() + "   " + d.getEtat());
-                d = roomHandler.getDefi(Long.parseLong(did));
                 timerSession.deconnect(USER_NICK);
                 response.sendRedirect("game.jsp?id="+did);      
             }
+        } else if("refuser-defi".equals(action)) {
+            String did = (String) request.getParameter("did");
+            
+            if (did != null && !did.isEmpty()) {
+                roomHandler.removeDefi(Long.parseLong(did));
+            }
         }
     }
+    
+    // Récupération des défi
+    List<Defi> defiList = roomHandler.getDefis(USER_NICK);
 %>
 <!DOCTYPE html>
 <html>
@@ -120,7 +121,7 @@
                         <tr>
                             <td><%= d.getFirstPlayer().getNickName() %></td>
                             <td><%= d.getFirstPlayer().getScore() %></td>
-                            <td><a href="?action=accepter-defi&did=<%= d.getId() %>">Accepter</a>
+                            <td><a href="?action=accepter-defi&did=<%= d.getId() %>">Accepter</a>-<a href="?action=refuser-defi&did=<%= d.getId() %>">Refuser</a>
                         </tr>
                     </tbody>
                     <%
@@ -165,7 +166,7 @@
                     </table>
                 </div>
             </div>
-            <p><input type="submit" onclick="top.location.href='logout.jsp';" value="Déconnecter" /></p>
+            <p class="centered-content"><input type="submit" onclick="top.location.href='logout.jsp';" value="Déconnecter" /></p>
         </div>
     </body>
 </html>

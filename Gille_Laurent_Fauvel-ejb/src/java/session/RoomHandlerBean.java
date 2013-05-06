@@ -31,9 +31,11 @@ public class RoomHandlerBean implements RoomHandler {
 
     @Override
     public void accepterDefi(long id) {
-         Defi d = getDefi(id);
-         d.setEtat();
-         em.merge(d);
+        try {
+            Defi d = getDefi(id);
+            d.setEtat();
+            em.merge(d);
+        } catch(Exception e) {}
     }
     
     @Override
@@ -59,9 +61,11 @@ public class RoomHandlerBean implements RoomHandler {
     }
     
     @Override
-    public void removeDefi(Defi d) {
+    public void removeDefi(long id) {
         em.clear();
-        Defi defiToRemove = em.find(Defi.class, d.getId());
-        em.remove(defiToRemove);
+        try {
+            Defi defiToRemove = em.find(Defi.class, id);
+            em.remove(defiToRemove);
+        } catch(Exception e) {}
     }
 }

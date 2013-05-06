@@ -20,6 +20,14 @@ th, td {
     text-align: left;
 }
 
+h2 {
+    font-family: Helvetica;
+}
+
+span {
+    margin: 0 2px;
+}
+
 .table-wrap {
     background: #efefef;
     border: 1px gray groove;
@@ -79,10 +87,6 @@ caption {
     font-family: 'SambaRegular';
     font-size: 18px;
     text-shadow: 1px 1px #efefef;
-}
-
-h2 {
-    font-family: Helvetica;
 }
 
 /*** index.jsp ***/

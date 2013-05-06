@@ -61,14 +61,9 @@
         </div>
         <p id="header-line" class="line"></p>
         <div id="body-wrap">
-        <%
-            out.println(user + " " + gamehandler.getScore(user) + " : " + gamehandler.getScore(opponent) + " "+ opponent);
-        %>
-        <br />
-        <%
-            out.println(gamehandler.getOldChoix(user) + " : " + gamehandler.getOldChoix(opponent) + "  (Dernier Choix)");
-        %>
-        <p></p>
+            <h2>Score</h2>
+            <h2 class="centered-content">(<i><%= user %></i>) <%= gamehandler.getScore(user) %> : <%= gamehandler.getScore(opponent) %> (<i><%= opponent %></i>)</h2>
+            <p><%= gamehandler.getOldChoix(user) %> : <%= gamehandler.getOldChoix(opponent) %>  (Dernier Choix)</p>
         <%   
             gamehandler.setPlayers(Player1, Player2);
             String choix = "";
@@ -78,7 +73,7 @@
             if (choix != null) {
                 if (choix.equals("backToRoom")) {
                     response.sendRedirect("room.jsp");
-                    roomHandler.removeDefi(d);
+                    roomHandler.removeDefi(d.getId());
                     gamehandler.reinitialisation();
                 } else {
                     if (opponent.equals("computer")) {
@@ -96,18 +91,9 @@
                 }
             }
         %>
-        <p></p>
-        <%
-            out.println("Mon choix : " + gamehandler.getChoix(user));
-        %>
-        <p></p>
-        <%
-            out.println("Son choix : " + gamehandler.getOpponentChoix(user));
-        %>
-        <p></p>
-         <%
-            out.println("Tour : " + gamehandler.getTour());
-        %>
+        <p><span><strong>Mon choix</strong></span><span><%= gamehandler.getChoix(user) %></span></p>
+        <p><span><strong>Son choix</strong></span><span><%= gamehandler.getOpponentChoix(user) %></span></p>
+        <p><span><strong>Tour</strong></span><span><%= gamehandler.getTour() %></span></p>
         <p></p>
         <%
             if(gamehandler.checkScore()==0){
@@ -116,35 +102,18 @@
         <form method="POST">
             <input type="hidden" name="req-type" value="pierre" />
             <p><input type="submit" name="pierre" value="pierre" /></p>
-        </form>
-        <form method="POST">
             <input type="hidden" name="req-type" value="feuille" />
             <p><input type="submit" name="feuille" value="feuille" /></p>
-        </form>
-        <form method="POST">
             <input type="hidden" name="req-type" value="ciseaux" />
             <p><input type="submit" name="ciseaux" value="ciseaux" /></p>
         </form>
-        <%
-            } else {       
-         %>
-        <h1> Partie terminée </h1>
-        <p></p>
-        <%
-                 if(user.equals(Player1) && gamehandler.checkScore() == 1){
-                     gamehandler.end(user);
+        <%  } else {
+                if((user.equals(Player1) && gamehandler.checkScore() == 1) || (user.equals(Player2) && gamehandler.checkScore() == 2)){
+                    gamehandler.end(user);
         %>
         <h2> Vous avez gagné ! </h2>
         <p></p>
-        <%
-                } else if(user.equals(Player2) && gamehandler.checkScore() == 2){
-                     gamehandler.end(user);
-        %>
-        <h2> Vous avez gagné ! </h2>
-        <p></p>
-        <%       
-            } else {  
-        %>
+        <%      } else {  %>
         <h2> Vous avez perdu ! </h2>
         <p></p>
         <%       

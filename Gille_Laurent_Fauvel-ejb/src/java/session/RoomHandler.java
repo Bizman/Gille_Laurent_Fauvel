@@ -22,5 +22,5 @@ public interface RoomHandler {
     public List<Player> getPlayers(String myNick);
     public List<Defi> getDefis(String myNick);
     public Defi getDefi(long id);
-    public void removeDefi(Defi d);
+    public void removeDefi(long id);
 }
