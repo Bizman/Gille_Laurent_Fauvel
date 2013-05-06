@@ -1,7 +1,6 @@
 <%@page import="java.util.List"%>
 <%@page import="persistence.Defi"%>
 <%@page import="session.*"%>
-<%@page import="jeu.Room"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Set"%>
 <%@page import="java.util.Iterator"%>

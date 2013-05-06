@@ -31,7 +31,7 @@ public class GameHandlerBean implements GameHandler {
         this.choise2 = "";
         this.oldChoise1 = "";
         this.oldChoise2 = "";
-        this.nbGame = 0;
+        this.nbGame = 1;
         this.score1 = 0;
         this.score2 = 0;
         this.end = false;
