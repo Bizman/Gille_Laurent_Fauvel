@@ -25,6 +25,7 @@ public class ConnectivityHandlerBean implements ConnectivityHandler {
         } else if (!em.createNamedQuery("checkEmail").setParameter("mail", email).getResultList().isEmpty()) {
             return ConnectivityHandlerBean.MAIL_TAKEN;
         } else {
+            p.setState(PlayerState.DISCONNECTED);
             em.persist(p);
             return ConnectivityHandlerBean.SUBSCRIBE_OK;
         }

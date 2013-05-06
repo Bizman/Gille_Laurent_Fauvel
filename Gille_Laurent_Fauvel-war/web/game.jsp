@@ -1,6 +1,5 @@
 <% response.addHeader("Refresh","3"); %>
 <%@page import="session.GameHandler"%>
-<%@page import="jeu.*"%>
 <%@page import="javax.naming.InitialContext"%>
 <%@page import="session.RoomHandler"%>
 <%@page import="persistence.Defi"%>
