@@ -2,7 +2,6 @@
 <%@page import="persistence.Defi"%>
 <%@page import="misc.DefiState"%>
 <%@page import="session.RoomHandler"%>
-<%@page import="jeu.Room"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Set"%>
 <%@page import="java.util.Iterator"%>
@@ -10,7 +9,6 @@
 <%@page import="javax.sound.midi.SysexMessage"%>
 <%@page import="javax.naming.InitialContext"%>
 <%@page import="persistence.Player"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%!
     private RoomHandler roomHandler;
@@ -70,8 +68,8 @@
         </div>
         <p id="header-line" class="line"></p>
         <div id="body-wrap">
-            <h2>Vous Ãªtes en attente d'une rÃ©ponse de votre adversaire</h2>
-            <p class="centered-content"><input type="button" onClick="javascript:top.location.href='?action=annuler&id=<%= d.getId() %>'" value="Annuler le dÃ©fi" /></p>
+            <h2>Vous êtes en attente d'une réponse de votre adversaire</h2>
+            <p class="centered-content"><input type="button" onClick="javascript:top.location.href='?action=annuler&id=<%= d.getId() %>'" value="Annuler le défi" /></p>
         </div>
     </body>
 </html>

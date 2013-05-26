@@ -79,9 +79,9 @@
     } else {
         if((user.equals(Player1) && gamehandler.checkScore() == 1) || (user.equals(Player2) && gamehandler.checkScore() == 2)){
             gamehandler.end(user);
-            stillPlaying = false;
             winner = true;
         }
+        stillPlaying = false;
     }
 %>
 <!DOCTYPE html>
@@ -91,7 +91,7 @@
         <meta HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
         <title>O. Fauvel - A. Gille - A. Laurent - SI4 2013</title>
         <link rel="stylesheet" href="css/style.css" type="text/css" />
-        <script>window.setTimeout("location.reload(true);", 3000);</script>
+        <script>window.setTimeout("location = 'game.jsp?id=<%= id %>';", 3000);</script>
     </head>
     <body>
         <div id="header">

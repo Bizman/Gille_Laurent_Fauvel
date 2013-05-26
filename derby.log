@@ -1,8 +1,8 @@
-Sun May 26 12:23:10 CEST 2013 : Apache Derby Serveur réseau - 10.8.1.2 - (1095077) démarré et prêt à accepter les connexions sur le port 1527
+Sun May 26 13:21:40 CEST 2013 : Apache Derby Serveur réseau - 10.8.1.2 - (1095077) démarré et prêt à accepter les connexions sur le port 1527
 ----------------------------------------------------------------
-Sun May 26 12:23:10 CEST 2013:
-Amorçage de Derby version The Apache Software Foundation - Apache Derby - 10.8.1.2 - (1095077) : instance a816c00e-013e-e05c-fa4b-ffffab747dc8 
-dans le répertoire de base de données C:\Users\Alex\Documents\Serveur d'entreprise\JEE\TD\ejb\enterprise\Gille_Laurent_Fauvel\Gille_Laurent_Fauvel_DataBase  avec le chargeur de classe sun.misc.Launcher$AppClassLoader@3d637d45
+Sun May 26 13:21:55 CEST 2013:
+Amorçage de Derby version The Apache Software Foundation - Apache Derby - 10.8.1.2 - (1095077) : instance a816c00e-013e-e092-89bf-ffffab747dc8 
+dans le répertoire de base de données C:\Users\Alex\Documents\Serveur d'entreprise\JEE\TD\ejb\enterprise\Gille_Laurent_Fauvel\Gille_Laurent_Fauvel_DataBase  avec le chargeur de classe sun.misc.Launcher$AppClassLoader@224478fe
 
 java.vendor=Oracle Corporation
 java.runtime.version=1.7.0_07-b11
