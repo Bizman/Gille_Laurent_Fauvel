@@ -28,6 +28,11 @@ span {
     margin: 0 2px;
 }
 
+.box {
+	width: 380px;
+	display: inline-block;
+}
+
 .table-wrap {
     background: #efefef;
     border: 1px gray groove;
@@ -118,6 +123,15 @@ h2 {
     width: 76px;
     display: inline-block;
     margin: 18px 0;
+}
+
+.fat-button {
+	display: inline-block;
+	height: 50px;
+	width: 90px;
+	font-size: 22px;
+	font-weight: bold;
+	margin: 25px 10px;
 }
 
 label {

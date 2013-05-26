@@ -87,7 +87,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>O. Fauvel - A. Gille - A. Laurent - SI4 2013</title>
         <link rel="stylesheet" href="css/style.css" type="text/css" />
-        <script>window.setTimeout("location = 'room.jsp';", 5000);</script>
+        <script>window.setTimeout("location.reload(true);", 5000);</script>
     </head>
     <body>
         <div id="header">

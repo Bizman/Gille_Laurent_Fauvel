@@ -27,10 +27,10 @@ public class GameHandlerBean implements GameHandler {
    public void initPlayer() {
         this.player1 = "player1";
         this.player2 = "player2";
-        this.choise1 = "";
-        this.choise2 = "";
-        this.oldChoise1 = "";
-        this.oldChoise2 = "";
+        this.choise1 = "aucun";
+        this.choise2 = "aucun";
+        this.oldChoise1 = "aucun";
+        this.oldChoise2 = "aucun";
         this.nbGame = 1;
         this.score1 = 0;
         this.score2 = 0;
@@ -60,16 +60,16 @@ public class GameHandlerBean implements GameHandler {
          } else if (p.equals(player2)) {
              return this.choise2; 
          }   
-         return "";
+         return "aucun";
    }
     @Override
     public String getOpponentChoix(String p) {
-        if(p.equals(player1) && !choise1.equals("")) {
+        if(p.equals(player1) && !choise1.isEmpty()) {
             return choise2;
-        } else if(p.equals(player2) && !choise2.equals("")) {
+        } else if(p.equals(player2) && !choise2.isEmpty()) {
             return choise1;
         }
-        return "";
+        return "aucun";
     }
     @Override
    public String getOldChoix(String p) {
@@ -79,7 +79,7 @@ public class GameHandlerBean implements GameHandler {
          else if (p.equals(player2)) {
              return this.oldChoise2; 
          }   
-         return "";
+         return "aucun";
    }
     
      @Override
@@ -90,30 +90,30 @@ public class GameHandlerBean implements GameHandler {
          else if (p.equals(player2)) {
              return this.score2; 
          }   
-         return -1;
+         return 0;
    }
    
     @Override
    public void play() {
-        if(choise1.equals("") || choise2.equals("")) {
+        if(choise1.equalsIgnoreCase("aucun") || choise2.equalsIgnoreCase("aucun")) {
             return;
         } else {
             nbGame++;
             if(!choise1.equals(choise2)){
-                if (choise1.equals("pierre")) {
-                    if(choise2.equals("ciseaux")) {
+                if (choise1.equalsIgnoreCase("pierre")) {
+                    if(choise2.equalsIgnoreCase("ciseaux")) {
                         score1++;
                     } else {
                         score2++;
                     }
-                } else if (choise1.equals("ciseaux")) {
-                    if(choise2.equals("feuille")) {
+                } else if (choise1.equalsIgnoreCase("ciseaux")) {
+                    if(choise2.equalsIgnoreCase("feuille")) {
                         score1++;
                     } else {
                         score2++;
                     }
-                } else if (choise1.equals("feuille")) {
-                    if(choise2.equals("pierre")) {
+                } else if (choise1.equalsIgnoreCase("feuille")) {
+                    if(choise2.equalsIgnoreCase("pierre")) {
                         score1++;
                     } else {
                         score2++;
@@ -123,8 +123,8 @@ public class GameHandlerBean implements GameHandler {
             this.oldChoise1 = this.choise1;
             this.oldChoise2 = this.choise2;
         }
-        choise1 = "";
-        choise2 = "";
+        choise1 = "aucun";
+        choise2 = "aucun";
     }
     
     @Override
@@ -156,11 +156,11 @@ public class GameHandlerBean implements GameHandler {
     public void reinitialisation() {
         this.player1 = "player1";
         this.player2 = "player2";
-        this.choise1 = "";
-        this.choise2 = "";
-        this.oldChoise1 = "";
-        this.oldChoise2 = "";
-        this.nbGame = 0;
+        this.choise1 = "aucun";
+        this.choise2 = "aucun";
+        this.oldChoise1 = "aucun";
+        this.oldChoise2 = "aucun";
+        this.nbGame = 1;
         this.score1 = 0;
         this.score2 = 0;
         this.end = false;
